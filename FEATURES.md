@@ -21,3 +21,8 @@ Voila je vous laisse sur çà aurevoir.
 
 Plus sérieusement, votre application va tourner sur votre PC à vous et personne d'autre n'y aura accès donc pour tester c'est un peu pauvre. A moins de réussir à accéder au PC des autres par leur ip local vous serez seul à tester sa réactivité (sur plusieurs navigateurs en même temps par exemple oui bien vu Jean Maxime !)
 
+Nous avons donc hébergé l'appli final sur heroku pour que vous puissiez tester.
+
+- [ ] Mettre le lien vers l'appli
+
+
