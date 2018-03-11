@@ -8,11 +8,21 @@ Voici ce l'application doit faire au final :
 - Afficher une liste des cryptomonnaies
 - Pouvoir cliquer sur l'une d'elle pour afficher sa fiche et son évolution en **temps réel** grâce à un graphique
 - Pouvoir gérer des utilisateurs (avec Meteor c'est 2 à 5 lignes dont un import selon vos envie de configuration !!)
-- Pouvoir poser un ordre d'achat
-- Pouvoir répondre à un ordre d'achat
+- Pouvoir poser un ordre de vente
+- Pouvoir répondre à un ordre de vente
 
 Vous êtes vraiment libre d'ajouter n'importe quelle fonctionnalité. Gardez à l'esprit que Meteor possède une [librairie de 10000 packages](https://atmospherejs.com/) donc avant de coder quoi que ce soit, allez y faire un tour pour voir si ce que vous souhaitez n'existe pas déjà. Vous pouvez bien entendu créer vos propres packages et les publier sur AtmosphereJS si l'envie vous prend 😃
 
+## 1) Afficher les cryptomonnaies
+TODO
+## 2) Afficher la fiche d'une cryptomonnaie
+TODO
+## 3) Ajouter un système d'authentification
+TODO
+## 4) Poser un ordre d'achat
+TODO
+## 5) Répondre à un ordre de vente
+TODO
 ## Rendu de l'application final
 
 Comme vous devez vous en doutez, vous êtes seul ...
