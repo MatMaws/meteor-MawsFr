@@ -10,45 +10,45 @@ Décidément, on ne l'arrête plus ce Mouss 👳
 ## Installation de Meteor
 Bon c'est pas qu'on a pas le temps ... mais on a pas le temps, alors on va procéder à l'installation tout de suite !
 
-### Tu es sur le PC de la fac
+### Vous êtes sur le PC de la fac
 
-Tu es obligé de travailler sur le PC de la fac ? Pas de panique Piknik, on a aussi pensé à toi 😜
+Vous êtes obligé de travailler sur le PC de la fac ? Pas de panique Piknik, on a aussi pensé à vous 😜
 
 Il suffit de cloner le repo Github de Meteor dans le /local/<ton_nom>.
 
-Tout d'abord lance un terminal et tape
+Tout d'abord lancez un terminal et tapez
 ```Shell
 cd /local/<ton_nom>
 ```
-Puis tape
+Puis tapez
 ```Shell
 git clone https://github.com/meteor/meteor.git
 ```
 
 Et c'est tout 😁
 
-NB : Comme tu n'a pas les droits d'admin sur ta machine, tu ne peux pas rajouter l'executable de meteor dans la variable path !
+NB : Comme vous n'avez pas les droits d'admin sur votre machine, vous ne pouvez pas rajouter l'executable de meteor dans la variable path !
 
-Tu va donc devoir à chaque fois taper le chemin complet vers l'executable pour utiliser meteor (même si tu n'aura pas à le faire souvent).
+Vous allez donc à chaque fois devoir taper le chemin complet vers l'executable pour utiliser meteor (même si vous n'aurez pas à le faire souvent).
 
 Pour lancer l'executable il suffira de taper
-```
+```Shell
 /local/<ton_nom>/meteor/meteor
 ```
 
 [TODO : VOIR SI ON PEUT PAS CRER UN ALIAS PLUTOT]
 
-### Tu es sur ton PC perso ?
+### Vous êtes sur votre PC perso ?
 
-Tu peux aussi cloner le Github de meteor comme dans la partie **PC de la fac** et utiliser le bon executable. Tu peux même rajouter le chemin vers l'installation de meteor si ça te chante 👀
+Vous pouvez aussi cloner le Github de meteor comme dans la partie **PC de la fac** et utiliser le bon executable. Vous pouvez même rajouter le chemin vers l'installation de meteor si ça vous chante 👀
 
-Sinon si tu préfère les bons vieux installateur je t'invite à aller directement sur [cette page](https://www.meteor.com/install) et de suivre les instructions 😉
+Sinon si vous préfèrez les bons vieux installateur je vous invite à aller directement sur [cette page](https://www.meteor.com/install) et de suivre les instructions 😉
 
-NB : Si tu utilise windows (bouh !), tu dois d'abord installer chocolatery pour pouvoir ensuite télécharger meteor donc on te conseil la méthode du clone Github 😜
+NB : Si vous utilisez windows (bouh !), vous devez d'abord installer chocolatery pour pouvoir ensuite télécharger meteor donc on vous conseil la méthode du clone Github 😜
 
 ## Création d'un nouveau projet
 Nous avons déjà initialisé le projet pour vous avec la commande
-```
+```Shell
 meteor create bitdenver
 ```
 
@@ -56,16 +56,23 @@ Simple non ? Après ça vous pouvez commencer à travailler !
 
 La commande créé un projet de base avec les dossiers principaux client et server ainsi que tous les fichiers main.* .
 
-
 > Sachez qu'il est possible d'avoir un dossier avec > une architecture plus complète en éxécutant la commande
-> ``
+> ``Shell
 > meteor create bitdenver --full
 > ``.
 >Essayez dans un autre dossier pour voir la différence !
 
 Bon comme vous avez cloné un repo Github, il va falloir faire un 
-```
+```Shell
 npm install
 ```
 
-Finiii on passe à la [suite]() !
+## Lancement du serveur
+ Pour lancer le serveur, tapez
+ ```Shell
+meteor
+ ```
+ dans le dossier de votre projet et attendez que ça vous et puis c'est tout ! Vous n'aurez jamais besoin d'arrêter votre serveur !
+
+
+Finiii on passe à la [suite](FEATURES.md) !
