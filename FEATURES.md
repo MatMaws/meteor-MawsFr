@@ -25,4 +25,13 @@ Nous avons donc hébergé l'appli final sur heroku pour que vous puissiez tester
 
 - [ ] Mettre le lien vers l'appli
 
+## Et voilà, it just works !
 
+Alors c'est pas plaisant de coder avec ce framework avouez ?
+
+Ça a vraiment été pensé pour que vous n'ayez pas à coder les routines que l'on connais tous à base de promise et de callbacks. Tous est géré par Meteor.
+
+Si vous avez fini avant tous le monde, vous êtes génial.
+Si ça vous dit vous pouvez vous amuser à coder un jeu en temps réel avec Phaser et Meteor.
+
+Sinon lisez la [dernière partie](PRODUCTION.md) du tuto même si vous n'allez plus coder à partir de maintenant.
