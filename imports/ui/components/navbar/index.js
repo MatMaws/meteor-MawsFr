@@ -1,4 +1,6 @@
 import './navbar.html';
 import './navbar.css';
 
-// TODO
+import { Template } from 'meteor/templating';
+
+// TODO: Ajouter les helpers
