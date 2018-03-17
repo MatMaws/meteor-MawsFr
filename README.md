@@ -139,5 +139,44 @@ Ce bloc peut aussi s'écrire sous une forme plus explicite
 ```
 La variable cryptomonnaie est implicitement déclarée et passée au template `crypto`.
 
+Insérez ensuite
+``{{> list_crypto}}``
+dans content.html.
 
+### Affichons les données
+Cette partie regroupe trois gros concepts: la publication, la souscription et les helpers. Vous connaissez déjà l'un des trois, reste à voir es deux autres.
+
+Comme nous l'avons présenté, pour que le client accède aux données de la base du serveur, il faut que celui-ci l'en autorise. Pour cela il doit publier des parties (ou toute) de la base de données.
+Nous devons donc publier les données de la collections Crypto et Wallets.
+
+Dans un premier temps, insérez ceci dans le fichier `/imports/api/crytocurrency/server/publications.js`
+```js
+Meteor.publish('crypto', () => {
+  return Crypto.find({});
+});
+```
+Et voila vous venez de publier "toutes les cryptomonnaies" au monde entier. Reste maintenant à faire en sorte que les clients y accèdent. Pour cela il faut souscrire au flux de publication "crypto".
+Insérez dans le fichier `/imports/pages/list_cryptos/index.js`
+
+```js
+Template.list_crypto.onCreated(function() {
+    this.subscribe('crypto');
+});
+```
+
+Que fait ce code ? Tout simplement il demande à l'instance du template `list_crypto`, à sa création, de souscrire à la publication déclarée précédemment. Je dis "instance" car il est possible d'avoir plusieurs instance de votre template (bah oui tout l'interêt des templates c'est de pouvoir être réutilisable à plusieurs endroit et donc à chaque fois que vous insérer le template dans une page html avec la balise {{> list_crypto}}, une instance est créé). On peut se référer à l'instance en cours grâce à `this`. 
+On aurait aussi pu écrire
+```js
+Meteor.subscribe('crypto');
+```
+
+Mais adoptez la première version avec `this` pour être habitué car elle permet d'ajouter implicitement des fonctions liées aux souscription notamment la fonction this.subscriptionsReady() qui permet de savoir si les données ont été récupéres afin d'être affichées (pour éviter les nullpointer).
+
+> NB: Si parfois vous avez des problèmes d'affichage c'est que vous n'attendez pas que les données soit chargées pour les afficher. Si ca vous arrive utilisez la condition 
+```js
+if(this.subscriptionsReady) {
+    // afficher les données
+}
+```
+Ca n'arrive que lorsque vous utilisez des composant non réactif (non fait pour le temps réel) en d'autres termes tous les composants non produits par Meteor ou installés depuis npm.
 
