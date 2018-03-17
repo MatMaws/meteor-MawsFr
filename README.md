@@ -186,6 +186,7 @@ On se calme 💣️
 Il faut maintenant implémenter le helper qui va envoyer les données souscrits vers le template.
 
 Je vous laisse faire.
+
 .
 
 .
@@ -202,7 +203,8 @@ Je vous laisse faire.
 
 C'est bon ?
 Voici la solution
-`/imports/pages/list_cryptos/index.js`
+
+Dans `/imports/pages/list_cryptos/index.js`
 ```
 Template.list_crypto.helpers({
   cryptos() {
