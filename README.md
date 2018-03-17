@@ -220,3 +220,9 @@ Template.crypto.helpers({
   },
 });
 ```
+
+Il reste maintenant à faire la même chose pour Wallets.
+Vous êtes grand.
+
+### Insertion de données d'exemple
+Vous pourriez faire des appels REST sur coinmarketcap pour récupérer la liste des cryptomonnaie mais ce n'est pas l'objet ici. On vous a donc concocté un script `/imports/startup/server/initdb.js` qui s'execute à chaque démarrage de votre serveur et qui vérifie que la collections Crypto n'est pas vide sinon il la rempli avec des données d'exemple.
