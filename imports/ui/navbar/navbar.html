@@ -1,0 +1,27 @@
+<template name="navbar">
+    <nav id="theNavbar">
+        <div class="nav-wrapper">
+            <a href="/" class="brand-logo">
+                <img id="logo" src="/img/denverlogo.png" />
+            </a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <!-- TODO : rendre visible seulement à un utilisateur connecté -->
+                <li>
+                    Portefeuille: 0 $ <!-- Afficher le portefeuille -->
+                </li>
+                <li>
+                    <a href="/">Cryptomonnaies</a>
+                </li>
+                <!-- TODO : rendre visible seulement à un utilisateur connecté -->
+                <li>
+                    <a href="/sales">Mes ordres de vente
+                        <span class="new badge" data-badge-caption="en cours"><!-- TODO : Afficher mon nombre d'ordre de vente --></span>
+                    </a>
+                </li>
+                <li>
+                    <!-- TODO : Injectez le bouton d'authentification -->
+                </li>
+            </ul>
+        </div>
+    </nav>
+</template>
