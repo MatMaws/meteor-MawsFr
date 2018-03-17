@@ -86,15 +86,45 @@ Vous pouvez maintenant injecter votre menu, votre contenu vide et votre pied de 
 Simple non ?
 
 ### Afficher des données
+
 Nous allons maintenant afficher une données récupérée depuis le JS. Cela vous sera très utile pour afficher des données de la base de données.
 Allez dans le fichier `/imports/ui/navbar/index.js` et écrivez
 
+```js
+Template.navbar.helpers({
+  dollarWallet() {
+    return 9876;
+  },
+  currency: 'dollars',
+});
+```
 
+puis allez dans le fichier navbar.html et remplacer
 
+```
+Portefeuille: 0 $
+```
 
-### Les points d'entrés
+par
 
-Si vous regardez dans les dossier `client` et `server` à la racine du projet, vous pouvez apercevoir deux fichiers qui contiennent chacun des imports qui pointent sur les fichiers **index.js** des sous-répertoires du dossier `/imports/startup`. Rapellez vous que les fichier main.\* sont chargés en dernier, donc le code des fichiers importés est executé avant.
+```
+Portefeuille: {{dollarWallet}} {{currency}}
+```
+
+Vous observez
+
+```
+Portefeuille: 9876 $
+```
+
+#### Explication
+
+La variable Template permet de recupérer n'importe quel template par son nom, ici `navbar`.
+La fonction `helpers` permet de faire passer un objet au template. Cet objet peut contenir toutes les données que vous voulez ! Et pour afficher les données vous l'avez fait avec {{nom_de_variable}} ou {{nom_de_fonction}}.
+
+<!-- ### Les points d'entrés -->
+
+<!-- Si vous regardez dans les dossier `client` et `server` à la racine du projet, vous pouvez apercevoir deux fichiers qui contiennent chacun des imports qui pointent sur les fichiers **index.js** des sous-répertoires du dossier `/imports/startup`. Rapellez vous que les fichier main.\* sont chargés en dernier, donc le code des fichiers importés est executé avant. -->
 
 ## Et voilà, it just works !
 
