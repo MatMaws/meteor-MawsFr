@@ -180,3 +180,41 @@ if(this.subscriptionsReady) {
 ```
 Ca n'arrive que lorsque vous utilisez des composant non réactif (non fait pour le temps réel) en d'autres termes tous les composants non produits par Meteor ou installés depuis npm.
 
+##### Bon on les affiche ces données ?
+On se calme 💣️
+
+Il faut maintenant implémenter le helper qui va envoyer les données souscrits vers le template.
+
+Je vous laisse faire.
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+C'est bon ?
+Voici la solution
+`/imports/pages/list_cryptos/index.js`
+```
+Template.list_crypto.helpers({
+  cryptos() {
+    return Crypto.find();
+  },
+});
+
+Template.crypto.helpers({
+  inWallet() {
+    return Wallets.findOne({
+      $and: [{ code: this.code }, { owner: Meteor.userId() }],
+    }).nbCoins;
+  },
+});
+```
