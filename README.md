@@ -44,7 +44,7 @@ Insérez le template suivant dans le fichier `/imports/pages/list_cryptos/list_c
 <template name="list_crypto">
     <div class="row">
         <!-- liste des cryptos -->
-        {{# each cryptos}}
+        {{#each cryptos}}
             {{> crypto}}
         {{/each}}
         <!-- Ordres de ventes -->
@@ -105,3 +105,39 @@ Insérez le template suivant dans le fichier `/imports/pages/list_cryptos/list_c
     </div>
 </template>
 ```
+
+#### Le block {{# if}}
+Comme l'avez deviné tout ce qui est dans un bloc
+```
+{{#if condition}}
+    contenu conditionnel
+{{/if}}
+```
+
+est affiché si la condition est respectée.
+Ainsi on peut voir que l'on se sert de la variable currentUser (importée automatiquement avec le package qui vous a facilité l'authent) pour afficher ou pas certaines partie de la page.
+Si un utilisateur n'est pas connecté, certaines informations n'ont pas a être affichée.
+
+#### Le block {{# each}}
+Rappel: Nous voulons sur la page d'accueil la liste des cryptomonnaire sous forme de carte contenant certaines informations. Nous devons donc itérer sur chaque cryptomonnaie pour afficher sa description. 
+
+Analysons les templates. 
+
+```
+{{#each cryptos}}
+    {{> crypto}}
+{{/each}}
+```
+
+Le template `list_crypto` permet d'itérer sur un tableau passé dans le helper (que nous verrons plus tard) et afficher pour chacun le template `crypto`. Ce dernier va se contenter d'afficher les informations de l'objet en cours d'affichage.
+Ce bloc peut aussi s'écrire sous une forme plus explicite
+
+```
+{{#each cryptomonnaie in cryptos}}
+    {{> crypto}}
+{{/each}}
+```
+La variable cryptomonnaie est implicitement déclarée et passée au template `crypto`.
+
+
+
