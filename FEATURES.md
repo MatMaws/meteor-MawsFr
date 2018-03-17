@@ -122,17 +122,30 @@ Portefeuille: 9876 $
 La variable Template permet de recupérer n'importe quel template par son nom, ici `navbar`.
 La fonction `helpers` permet de faire passer un objet au template. Cet objet peut contenir toutes les données que vous voulez ! Et pour afficher les données vous l'avez fait avec {{nom_de_variable}} ou {{nom_de_fonction}}.
 
-<!-- ### Les points d'entrés -->
+## Ajouter l'authentification
+Vous êtes peut être en train de vous dire
+> Et zut je vais encore devoir mettre en place l'authentification 😧
 
-<!-- Si vous regardez dans les dossier `client` et `server` à la racine du projet, vous pouvez apercevoir deux fichiers qui contiennent chacun des imports qui pointent sur les fichiers **index.js** des sous-répertoires du dossier `/imports/startup`. Rapellez vous que les fichier main.\* sont chargés en dernier, donc le code des fichiers importés est executé avant. -->
+Allez dans le fichier `navbar.html` et modifiez comme ceci :
+```html
+<li>
+    <!-- TODO : Injectez le bouton d'authentification -->
+    {{> loginButtons}}
+</li>
+```
+Et voila une authentification toute faite ! Votre site web s'est rafraichit tout seul, allez voir 😉
+
+Vous préférez taper un pseudo au lieu d'une addesse pour vous connecter ?
+Mettez ceci dans le fichier `/imports/startup/client/useraccounts-configuration.js`
+
+```js
+Accounts.ui.config({
+  passwordSignupFields: 'USERNAME_ONLY', // un pseudo au lieu d'un email pour l'authentification
+});
+```
 
 ## Et voilà, it just works !
 
-Alors c'est pas plaisant de coder avec ce framework avouez ?
+Excusez nous des problèmes de CSS, pas eu le temps de les corriger 😰 #jeSuisPEPIT.
 
-Ça a vraiment été pensé pour que vous n'ayez pas à coder les routines que l'on connais tous à base de promise et de callbacks. Tous est géré par Meteor.
-
-Si vous avez fini avant tous le monde, vous êtes génial.
-Si ça vous dit vous pouvez vous amuser à coder un jeu en temps réel avec Phaser et Meteor.
-
-Sinon lisez la [dernière partie](PRODUCTION.md) du tuto même si vous n'allez plus coder à partir de maintenant.
+Vous pouvez maintenant pull la branche `etape_2`.
