@@ -146,6 +146,6 @@ Accounts.ui.config({
 
 ## Et voilà, it just works !
 
-Excusez nous des problèmes de CSS, pas eu le temps de les corriger 😰 #jeSuisPEPIT.
+Excusez nous des problèmes de CSS, on a pas eu le temps de les corriger 😰 #jeSuisPEPIT. Après bon on vous a évité une authent fastidieuse vous pouvez pas nous en vouloir :3.
 
 Vous pouvez maintenant pull la branche `etape_2`.
