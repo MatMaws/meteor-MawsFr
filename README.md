@@ -284,4 +284,4 @@ Alors pas trop dur n'est ce pas ? Meteor est la pour vous simplifier la récupé
 
 Vous pouvez maintenant commit vos changements, `git checkout etape_4` et lire le **README.md** de cette branche.
 
-
+La partie prochaine est pour ceux qui auraient fini avant tout le monde donc vous pressez pas prenez une petite pause 🥛🍞
