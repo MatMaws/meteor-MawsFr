@@ -8,7 +8,13 @@ Un clone de bittrex dans le cadre du cours de CARA
 * Afficher la valeur en dollar de la saisie
 
 ## Utiliser des package NPM c'est aussi possible !
-Comme nous vous l'avons dis pendant la prez', il est possible d'utiliser des package npm.
+Comme nous vous l'avons dis pendant la prez', il est possible d'utiliser des package npm. Nous allons afficher un graphique permettant de voir l'évolution du cours de la monnaie.
+
+Nous avons importer pour vous la librairie Chart JS qui permet de faire des graphique avec la commande
+
+```
+npm install chart.js --save
+```
 
 ## Debriefing
 
