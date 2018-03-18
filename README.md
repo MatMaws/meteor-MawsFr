@@ -2,11 +2,6 @@
 
 Un clone de bittrex dans le cadre du cours de CARA
 
-Avant tout faire un 
-```
-meteor npm install
-```
-
 ## Objectifs
 - Afficher la liste des cryptomonnaies sur la page d'accueil
 
