@@ -39,7 +39,7 @@ Quand un utilisateur est créé, il faut initialiser ses portefeuilles.
 Dans le fichier `/imports/startup/server/wallets-hook.js` vous pouvez voir que l'on se sert de la fonction `Accounts.onCreateUser` pour intercepter la création d'un utilisateur et que dans le corps de cette fonction on ajoute le portefeuille en dollar et un portefeuille par cryptomonnaie grace à une boucle.
 
 ### Affichage des cryptomonnaies
-Insérez le template suivant dans le fichier `/imports/pages/list_cryptos/list_crypto.html`
+Insérez le template suivant dans le fichier `/imports/ui/pages/list_cryptos/list_crypto.html`
 ```html
 <template name="list_crypto">
     <div class="row">
