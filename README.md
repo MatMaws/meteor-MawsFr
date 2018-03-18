@@ -232,7 +232,7 @@ Template.crypto.helpers({
 ```
 
 Il reste maintenant à faire la même chose pour Wallets.
-Vous êtes grand.
+Créer une souscription à `Wallets` et modifiez le helper dans `imports/ui/components/navbar/index.js` et modifier la partie du menu qui affiche le portefeuille dans  `imports/ui/components/navbar/index.html`.
 
 ### Insertion de données d'exemple
 Vous pourriez faire des appels REST sur coinmarketcap pour récupérer la liste des cryptomonnaie mais ce n'est pas l'objet ici. On vous a donc concocté un script `/imports/startup/server/initdb.js` qui s'execute au démarrage de votre serveur et qui vérifie que la collections Crypto n'est pas vide sinon il la rempli avec des données d'exemple. Celui ci devrait s'executer si vous redémarrez votre serveur.
