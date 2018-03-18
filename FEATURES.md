@@ -142,6 +142,9 @@ Accounts.ui.config({
 });
 ```
 
+Retournez sur votre site et voila 💘
+Vous pouvez créer des comptes sur votre site maintenant ! (Faites en aux moins deux pour les tests).
+
 ## Et voilà, it just works !
 
 Excusez nous des problèmes de CSS, on a pas eu le temps de les corriger 😰 #jeSuisPEPIT. Après bon on vous a évité une authent fastidieuse vous pouvez pas nous en vouloir :3.
