@@ -139,11 +139,10 @@ Ce bloc peut aussi s'écrire sous une forme plus explicite
 ```
 La variable cryptomonnaie est implicitement déclarée et passée au template `crypto`.
 
-Insérez ensuite
+Insérez ensuite dans `imports/ui/components/content/content.html`
 ```
 {{> list_crypto}}
 ```
-dans content.html.
 
 ### Affichons les données
 Cette partie regroupe trois gros concepts: les publications, les souscriptions et les helpers. Vous connaissez déjà l'un des trois, reste à voir les deux autres.
