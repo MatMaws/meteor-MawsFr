@@ -143,7 +143,7 @@ buyerId = "<l'id de lacheteur>" => Vendu
 
 Allez dans le fichier `/imports/ui/pages/crypto_details/sell_panel/index.js` et observez y le code suivant
 
-```
+```js
 Template.sell_panel.events({
   'submit #sellForm'(event) {
     event.preventDefault(); // pour éviter de rafraichir la page au moment du clic
@@ -158,7 +158,7 @@ Template.sell_panel.events({
     };
     console.log (sale);
 
-    // Insérer l'appel à la méthode Sales.sell
+    // TODO : Insérer l'appel à la méthode Sales.sell
   },
 });
 ```
@@ -171,7 +171,7 @@ Le plus important ici est d'utiliser l'objet sale généré par nos soins pour l
 
 Une méthode est une fonction définit du côté client **ET** serveur. Cette fonction nous rapelle un peu les webservice que l'on code: Le serveur expose des webservices et le client les appelle.
 
-Pour déclarer une méthode qui permet d'insérer un objet sale dans la pase collection Sales, insérer le code suivant dans le fichier `/imports/api/sales/methods.js` **SANS CLIQUER SUR LE BOUTON VALIDER**
+Pour déclarer une méthode qui permet d'insérer un objet sale dans la pase collection Sales, insérer le code suivant dans le fichier `/imports/api/sales/methods.js` **SANS CLIQUER SUR LE BOUTON VALIDER** 🎇
 
 ```js
 Meteor.methods({
@@ -182,7 +182,9 @@ Meteor.methods({
 });
 ```
 
-Voila comment on déclare des méthodes. Mais ATTENDEZ NE CLIQUEZ SUR RIEN ! Sinon vous allez insérer des données non cohérentes. Il faut quand même vérifier si le portefeuille de l'utilisateur permet cette transaction. Voici une version un peu plus complète
+Voila comment on déclare des méthodes. Les méthodes permettent de faire un traitement avant d'insérer les données. Comme un webservice quoi.
+
+ **Mais ATTENDEZ NE CLIQUEZ SUR RIEN !** Sinon vous allez insérer des données non cohérentes. Il faut quand même vérifier si le portefeuille de l'utilisateur permet cette transaction. Voici une version un peu plus complète
 
 ```js
 Meteor.methods({
