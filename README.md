@@ -18,8 +18,21 @@ npm install chart.js --save
 
 ## Debriefing
 
-Alors pas trop dur n'est ce pas ? Meteor est la pour vous simplifier la récupération et l'affichage de données pendant que vous vous concentrez sur le fonctionnel de votre application.
-
 Vous pouvez maintenant commit vos changements, `git checkout etape_5` et lire le **README.md** de cette branche.
 
-La partie prochaine est pour ceux qui auraient fini avant tout le monde donc vous pressez pas prenez une petite pause 🥛🍞
+## Et voilà, it just works !
+
+Alors c'est pas plaisant de coder avec ce framework avouez ?
+
+Ça a vraiment été pensé pour que vous n'ayez pas à coder les routines que l'on connais tous à base de promise et de callbacks. Tous est géré par Meteor et `it just works` 🌻
+
+Si vous avez fini avant tous le monde, vous êtes génial. Si vous voulez vous pouvez aussi réaliser les tâches suivantes:
+- Coder la page "Mes ordres de vente" (pas de correction vous êtes des pros maintenant)
+    - La page doit afficher tous VOS ordres de ventes auquels aucun acheteur n'a encore répondu et de proposer un bouton "Annuler l'ordre" à droite de chacun pour être remboursé
+- Vous pouvez vous amuser à aller chercher les vrais Volume et Taux grâce à des requetes ajax (cf diapo), et les afficher en temps réel sur votre magnifique site 😃
+- On ne sais pas vraiment quand un ordre de vente à trouvé un acheteur. Peut-etre afficher un Toast materialize lorsque l'on vent de la cryptomonnaie ?
+- Paginer la section transations ?
+
+Sinon si ça vous dit sachez que vous pouvez aussi coder des jeux en temps réel avec Phaser et Meteor. Essayez de faire un Mario multijoueur (en reprenant les exemple de Phaser bien sûr).
+
+Sinon lisez la [dernière partie](PRODUCTION.md) du tuto même si vous n'allez plus coder à partir de maintenant. On vous y montre comment sécuriser votre application contre les gentils utilisateurs qui voudraient se faire un virement de 1000 BTC de votre compte au leur 😎.
