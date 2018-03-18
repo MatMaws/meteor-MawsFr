@@ -18,7 +18,7 @@ Bon c'est pas qu'on a pas le temps ... mais on a pas le temps, alors on va proc�
 
 Vous êtes obligé de travailler sur le PC de la fac ? Pas de panique Piknik, on a aussi pensé à vous 😜
 
-Il suffit de cloner le repo Github de Meteor dans le /local/<ton_nom>.
+Il suffit de cloner le repo Github de Meteor dans le /local/<votre_nom>.
 
 Tout d'abord lancez un terminal et tapez
 
