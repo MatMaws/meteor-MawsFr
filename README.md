@@ -8,6 +8,7 @@ Un clone de bittrex dans le cadre du cours de CARA
 * Afficher la valeur en dollar de la saisie
 
 ## Utiliser des package NPM c'est aussi possible !
+
 Comme nous vous l'avons dis pendant la prez', il est possible d'utiliser des package npm. Nous allons afficher un graphique permettant de voir l'évolution du cours de la monnaie.
 
 Nous avons importer pour vous la librairie Chart JS qui permet de faire des graphique avec la commande
@@ -15,9 +16,11 @@ Nous avons importer pour vous la librairie Chart JS qui permet de faire des grap
 ```
 npm install chart.js --save
 ```
+
 Il suffit maintenant d'utiliser la librairie comme vous le feriez dans n'importe quel autre projet js.
 
 ### L'historique des taux ?
+
 A chaque fois qu'un taux est généré, il faut le sauvegarder dans une liste de taux en base. Pour cela nous avons créé une collection History (et son schéma) qui stock pour chaque code de cryptomonnaie une liste des taux de celle-ci.
 
 Vous pouvez retrouver le tout dans `/imports/api/history/history.js`
@@ -25,6 +28,7 @@ Vous pouvez retrouver le tout dans `/imports/api/history/history.js`
 Lisez les commentaires ;)
 
 Nous avons aussi mis à jour le simulateur pour sauvegarder les taux au fur et à mesure qu'ils sont généré en ajoutant cette partie dans le fichier `/imports/api/crytocurrency/server/simulator.js`
+
 ```js
 History.update(
   { code: element.code },
@@ -50,6 +54,7 @@ Insérez ce code dans le fichier `/imports/ui/pages/crypto_details/history/histo
 ```
 
 puis dans le fichier `/imports/ui/pages/crypto_details/history/history.js`
+
 ```js
 Template.history.onCreated(function() {
   this.getListId = () => FlowRouter.getParam('code');
@@ -71,7 +76,8 @@ Template.history.onCreated(function() {
 
 Template.history.onRendered(function() {
   this.autorun(() => {
-    if (this.subscriptionsReady()) { // Une fois que les données sont disponibles, on peut les utiliser dans notre composant
+    if (this.subscriptionsReady()) {
+      // Une fois que les données sont disponibles, on peut les utiliser dans notre composant
       var ctx = document.getElementById('historyChart').getContext('2d');
       this.chart = new Chart(ctx, {
         // The type of chart we want to create
@@ -136,6 +142,54 @@ Template.history.onRendered(function() {
 });
 ```
 
+Lisez les commentaires ;)
+
+## Afficher la valeur de la saisie en dollar
+
+Dans cette dernière (enfin !!) partie nous allons faire en sorte que le label à côté de la zone de saisie du nombre de coin à vendre se mette à jour automatiquement selon le taux en cours.
+
+Tout d'abord insérer dans le fichier `/imports/ui/pages/crypto_details/sell_panel/index.js`
+
+```js
+Template.sell_panel.onCreated(function() {
+  //On créé une variable reactive qui va etre utilisé dans le template pour afficher le total en dollar de la valeur saisie à la vente
+  // On l'affichera simplement avec le helper saleValue
+  this.theSaleValue = new ReactiveVar(0);
+});
+```
+
+Dans cette partie on créé une variable REACTIVE c'est a dire une variable qui va permettre de rafraichir le template lorsqu'elle change !
+
+Ajouter ensuite le helper qui permettra à la vue de récupérer sa valeur
+
+```js
+Template.sell_panel.helpers({
+  saleValue() {
+    return (
+      Template.instance().theSaleValue.get() *
+      Crypto.findOne({ code: FlowRouter.getParam('code') }).dollarValue
+    );
+  },
+});
+```
+
+Enfin il faut modifier cette variable à chaque fois que l'on saisie une valeur. Rajouter donc les évenements
+
+```js
+// Lorsque l'on entre un chifre, cela met à jour la variable reactive qui permet de connaitre le prix total en dollar du montant de la monnaie en cours de vente
+  'input #nbCoins'(event, template) {
+    let value = parseInt(event.target.value, 10) || 0;
+    template.theSaleValue.set(
+      value
+    );
+  },
+
+// Efface la variable lorsque l'on clique sur reset
+  'click #reset'(event, template) {
+    template.theSaleValue.set(0);
+  },
+```
+
 ## Et voilà, it just works !
 
 Alors c'est pas plaisant de coder avec ce framework avouez ?
@@ -143,11 +197,12 @@ Alors c'est pas plaisant de coder avec ce framework avouez ?
 Ça a vraiment été pensé pour que vous n'ayez pas à coder les routines que l'on connais tous à base de promise et de callbacks. Tous est géré par Meteor et `it just works` 🌻
 
 Si vous avez fini avant tous le monde, vous êtes génial. Si vous voulez vous pouvez aussi réaliser les tâches suivantes:
-- Coder la page "Mes ordres de vente" (pas de correction vous êtes des pros maintenant)
-    - La page doit afficher tous VOS ordres de ventes auquels aucun acheteur n'a encore répondu et de proposer un bouton "Annuler l'ordre" à droite de chacun pour être remboursé
-- Vous pouvez vous amuser à aller chercher les vrais Volume et Taux grâce à des requetes ajax (cf diapo), et les afficher en temps réel sur votre magnifique site 😃
-- On ne sais pas vraiment quand un ordre de vente à trouvé un acheteur. Peut-etre afficher un Toast materialize lorsque l'on vent de la cryptomonnaie ?
-- Paginer la section transations ?
+
+* Coder la page "Mes ordres de vente" (pas de correction vous êtes des pros maintenant)
+  * La page doit afficher tous VOS ordres de ventes auquels aucun acheteur n'a encore répondu et de proposer un bouton "Annuler l'ordre" à droite de chacun pour être remboursé
+* Vous pouvez vous amuser à aller chercher les vrais Volume et Taux grâce à des requetes ajax (cf diapo), et les afficher en temps réel sur votre magnifique site 😃
+* On ne sais pas vraiment quand un ordre de vente à trouvé un acheteur. Peut-etre afficher un Toast materialize lorsque l'on vent de la cryptomonnaie ?
+* Paginer la section transations ?
 
 Sinon si ça vous dit sachez que vous pouvez aussi coder des jeux en temps réel avec Phaser et Meteor. Essayez de faire un Mario multijoueur (en reprenant les exemple de Phaser bien sûr).
 
