@@ -1,4 +1,4 @@
-# Bitdenver (Etape 4)
+# Bitdenver (Etape 4 BONUS)
 
 Un clone de bittrex dans le cadre du cours de CARA
 
@@ -7,7 +7,8 @@ Un clone de bittrex dans le cadre du cours de CARA
 * Ajouter un beau graphique gardant l'historique des 10 derniers taux de la monnaie en cours d'affichage
 * Afficher la valeur en dollar de la saisie
 
-
+## Utiliser des package NPM c'est aussi possible !
+Comme nous vous l'avons dis pendant la prez' 
 ## Debriefing
 
 Alors pas trop dur n'est ce pas ? Meteor est la pour vous simplifier la récupération et l'affichage de données pendant que vous vous concentrez sur le fonctionnel de votre application.
