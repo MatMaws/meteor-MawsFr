@@ -30,8 +30,6 @@ Nous avons donc hébergé l'appli final pour que vous puissiez tester. Sinon vou
 
 - [ ] Mettre le lien vers l'appli
 
-## 1) Les bases déjà posées
-
 ### Objectifs
 
 * Afficher le menu
