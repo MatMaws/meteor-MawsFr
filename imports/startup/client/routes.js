@@ -17,3 +17,11 @@ FlowRouter.route('/', {
 });
 
 // TODO : Affiche le template crypto_details lorsque l'on va à l'adresse /crypto/:code
+// Page de détails d'une crypto monnaie
+FlowRouter.route('/crypto/:code', {
+  name: 'Crypto.show',
+  action(params, queryParams) {
+    console.log('Détails de ' + params['code'] + '!!');
+    BlazeLayout.render('app', { main: 'crypto_details' });
+  },
+});
