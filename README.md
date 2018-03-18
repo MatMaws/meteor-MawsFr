@@ -129,7 +129,7 @@ Analysons les templates.
 {{/each}}
 ```
 
-Le template `list_crypto` permet d'itérer sur un tableau passé dans le helper (que nous verrons plus tard) et afficher pour chacun le template `crypto`. Ce dernier va se contenter d'afficher les informations de l'objet en cours d'affichage.
+Le template `list_crypto` permet d'itérer sur un tableau passé dans le helper (que nous ferons juste après) et afficher pour chacun le template `crypto`. Ce dernier va se contenter d'afficher les informations de l'objet en cours d'affichage.
 Ce bloc peut aussi s'écrire sous une forme plus explicite
 
 ```
