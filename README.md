@@ -3,10 +3,12 @@
 Un clone de bittrex dans le cadre du cours de CARA
 
 ## Objectifs
-- Simuler de l'activité sur notre site pour constater la réactivité
-- Faire une nouvelle page et gérer le routing vers celle-ci
+
+* Simuler de l'activité sur notre site pour constater la réactivité
+* Faire une nouvelle page et gérer le routing vers celle-ci
 
 ## Bébé t'as déjà simulé ?
+
 Que diriez de mettre à jour en temps réel (avec des données random bien sûr) les taux des monnaies affichés sur la page d'acceuil ?
 
 Allez voir le fichier `imports/api/crytocurrency/server/simulator.js`
@@ -16,16 +18,18 @@ Vous remarquez que ce fichier est chargé seulement du côté serveur, donc c'es
 Que fait ce script ? Il génère tout simplement un nouveaux taux aléatoirement pour chaque cryptomonnaie.
 Pour activer le script changer `false` à `true` et aller sur votre [site](localhost:3000).
 
-Vous avez là un exemple de réactivité car si vous  ouvrez à côté un autre navigateur en mode privé (ou votre chrome sur votre portable) et vous verrez que la données se met à jour en temps réel chez tout le monde !
+Vous avez là un exemple de réactivité car si vous ouvrez à côté un autre navigateur en mode privé (ou votre chrome sur votre portable) et vous verrez que la données se met à jour en temps réel chez tout le monde !
 
 On pourrai très bien remplacer ce code par un appel REST 😊 (Mais nous ne le faisons pas car on a peur des imprévu avec le proxy etc ..).
 
 ## Afficher une nouvelle page
+
 Il existe plusieurs librairie de routing pour Meteor sachant qu'il préconise d'utiliser FlowRouter combiné avec BlazeLayout. Nous les avons déjà intégré dans le projet ;) (rapellez vous le gros meteor npm install)
 
 FlowRouter permet de définir des fonctions qui vont être exécutées selon l'url tandis que BlazeLayout va permettre de choisir le composant à afficher à l'endroit ou l'on veut.
 
 Regardez le fichier `imports/startup/client/routes.js`
+
 ```js
 // Page d'accueil
 FlowRouter.route('/', {
@@ -39,6 +43,7 @@ FlowRouter.route('/', {
 Nous avons défini une route `/` vers la page d'accueil (le surnom `Crypto.showAll` ne nous servira pas). A chaque fois que vous afficherez la page d'accueil, la fonction `action` sera appelée.
 
 Regardons de plus près la partie
+
 ```js
 BlazeLayout.render('app', { main: 'list_crypto' });
 ```
@@ -72,6 +77,7 @@ Créez une route vers cette page !
 .
 
 C'est bon ? voici la solution
+
 ```js
 // Page de détails d'une crypto monnaie
 FlowRouter.route('/crypto/:code', {
@@ -84,8 +90,9 @@ FlowRouter.route('/crypto/:code', {
 ```
 
 Vous apercevez dans ce petit bout de code que l'on attend un paramètre `:code` dans l'url. Celui ci est récupérable dans la variable params en faisant
+
 ```js
-params.code // ou params['code']
+params.code; // ou params['code']
 ```
 
 NB : Le code d'une crypto est son nom abrégé exemple btc, xvg etc ... testez !
@@ -95,12 +102,13 @@ Vous pouvez aussi faire passer des paramètre de requete de cette manière `/cry
 Vous pouvez maintenant cliquer sur l'une des cryptomonnaie de la page d'accueil pour voir votre nouvelle page s'afficher ✨ !
 
 ## Clic clic !
+
 Pour l'instant le bouton "Valider" ne permet pas de créer un ordre de vente.
 Vous pourriez utiliser JQuery (bah oui, ca reste du JS avant tout !) mais il y'a mieux. Vous avez utilisé les helpers tout à l'heure, et bien vous avez la même chose avec les events !
 
 Voici le code du template "Vendre" qui se trouve dans le fichier `/imports/ui/pages/crypto_details/sell_panel/index.js`
 
-```html 
+```html
 <template name="sell_panel">
     <div class="col s6 m6">
         <h2 id="sell">Vendre</h2>
@@ -123,7 +131,11 @@ Voici le code du template "Vendre" qui se trouve dans le fichier `/imports/ui/pa
 
 Ce qu'il faut remarquer c'est que nous avons un formulaire d'id `sellForm`, un input avec l'attribut name de valeur `nbCoins`, un label qui sera censé affiché la valeur en dollar de ce que vous tapez et un bouton pour valider la vente et un pour remettre à zéro la saisie.
 
-Nous avons aussi créé pour vous une nouvelle collection du doux nom de Sales qui contiendra les ordres de vendres (en vente et vendu). La règle de gestion est que si le champs `buyerId` est vide c'est qu'il n'y a pas eu d'achat sinon c'est qu'il y a eu une réponse à l'ordre de vente.
+Nous avons aussi créé pour vous une nouvelle collection du doux nom de Sales qui contiendra les ordres de ventes (en vente et vendu).
+Allez voir son schéma dans `/imports/api/sales/sales.js`
+
+La règle de gestion est que si le champs `buyerId` est vide c'est qu'il n'y a pas eu d'achat sinon c'est qu'il y a eu une réponse à l'ordre de vente.
+
 ```
 buyerId = "" => En cours de vente
 buyerId = "<l'id de lacheteur>" => Vendu
@@ -154,6 +166,7 @@ Template.sell_panel.events({
 Les commentaires parlent d'eux même. Le plus important ici est d'utiliser l'objet sale généré par nos soins pour l'insérer en base du côté serveur. Mais comment faire ? Si vous avez écoutez la présentation, vous avez dû entendre parler des Méthodes !
 
 ### Insérer en base avec les méthodes
+
 Une méthode est une fonction définit du côté client **ET** serveur. Cette fonction nous rapelle un peu les webservice que l'on code: Le serveur expose des webservices et le client les appelles.
 
 Pour déclarer une méthode qui permet d'insérer un objet sale dans la pase collection Sales, insérer le code suivant dans le fichier `/imports/api/sales/methods.js`
@@ -169,6 +182,7 @@ Meteor.methods({
 ```
 
 Voila comment on déclare des méthodes. Mais ATTENDEZ NE CLIQUEZ SUR RIEN ! Sinon vous allez insérer des données non cohérentes. Il faut quand même vérifier si le portefeuille de l'utilisateur permet cette transaction. Voici une version un peu plus complète
+
 ```js
 Meteor.methods({
   // Permet de vendre de la monnaie
@@ -193,13 +207,13 @@ Meteor.methods({
       Sales.insert(sale); // ajout de la vente
     }
   },
-
 });
 ```
 
 On vous laisse lire les commentaire 😇
 
 Ensuite pour appeler cette méthode du côté client il suffit d'écrire
+
 ```js
 Meteor.call('Sales.sell', sale);
 ```
@@ -208,20 +222,21 @@ de la même manière voici une version plus complète à mettre à l'emplacement
 
 ```js
 Meteor.call('Sales.sell', sale, (err, res) => {
-    if (err) {
+  if (err) {
     Materialize.toast(err.reason, 4000, 'rounded');
-    } else {
+  } else {
     Materialize.toast(
-        "Ordre de vente validé, en attente d'achat!",
-        4000,
-        'rounded'
+      "Ordre de vente validé, en attente d'achat!",
+      4000,
+      'rounded'
     );
     event.target.nbCoins.value = '';
-    }
+  }
 });
 ```
 
 ## Exercice
+
 Bon on vous a assez guidé pour la création de template donc on va vous faire bosser un tout petit peu :) (Vous aurez la correction dans la branche suivante mais pas de triche hein !)
 
 Vous allez implémenter dans le dossier `/imports/ui/pages/crypto_details` la partie "Acheter" qui est réprésenté par le dossier du template `sale_orders`
@@ -231,57 +246,61 @@ Vous allez implémenter dans le dossier `/imports/ui/pages/crypto_details` la pa
 Affichez la liste des ordres de ventes (sauf celle de l'utilisateur connecté) avec un bouton acheter qui permet de répondre à un ordre de vente.
 
 ### Indications
+
 Pour vous aider, vous aurez besoin de :
-- Meteor.userId() permet de récupérer du côté client **MAIS AUSSI** serveur l'id de l'utilisateur connecté et qui à fait l'action
-- La publication et la souscription de la collection Sales à déjà été faite pour vous donc vous pouvez utiliser la collection du côté client pour faire des requête dessus.
-    - D'ailleurs la souscription à été faite dans le template parent `crypto_details` qui transmet à tout les template enfants dont `saleOrders`
-- Vous devez utiliser un helper pour récupérer les ordres de ventes de la consigne
-- Vous devez créer un event qui répondra au clic du bouton "Acheter".
-    - Utilisez l'évenement 'click .buyButton'
-- Vous devez créer une Méthode 'Sales.buy' et l'apeller
-    - Le code d'un achat est le suivant:
+
+* Meteor.userId() permet de récupérer du côté client **MAIS AUSSI** serveur l'id de l'utilisateur connecté et qui à fait l'action
+* La publication et la souscription de la collection Sales à déjà été faite pour vous donc vous pouvez utiliser la collection du côté client pour faire des requête dessus.
+  * D'ailleurs la souscription à été faite dans le template parent `crypto_details` qui transmet à tout les template enfants dont `saleOrders`
+* Vous devez utiliser un helper pour récupérer les ordres de ventes de la consigne
+* Vous devez créer un event qui répondra au clic du bouton "Acheter".
+  * Utilisez l'évenement 'click .buyButton'
+* Vous devez créer une Méthode 'Sales.buy' et l'apeller
+  * Le code d'un achat est le suivant:
+
 ```js
 const wallet = Wallets.findOne({
-      $and: [{ code: sale.code }, { owner: Meteor.userId() }],
-    });
-    const USDTwallet = Wallets.findOne({
-      $and: [{ code: 'usdt' }, { owner: Meteor.userId() }],
-    });
-    const nbCoins = sale.nbCoins;
-    const total = sale.nbCoins * sale.dollarValue;
+  $and: [{ code: sale.code }, { owner: Meteor.userId() }],
+});
+const USDTwallet = Wallets.findOne({
+  $and: [{ code: 'usdt' }, { owner: Meteor.userId() }],
+});
+const nbCoins = sale.nbCoins;
+const total = sale.nbCoins * sale.dollarValue;
 
-    // on vérifie si on peut acheter avec l'usdt (portefeuille en dollar $)
-    if (USDTwallet.nbCoins < total) {
-      throw new Meteor.Error(
-        'not-enough-money',
-        "Vous n'avez pas assez d'argent en $"
-      );
-    } else {
-      // Si c'est bon on vend à l'acheteur !
-      Sales.update(
-        { _id: sale._id, buyerId: '' },
-        {
-          $set: {
-            buyerId: Meteor.userId(),
-            buyerUsername: Meteor.user().username,
-          },
-        }
-      );
-      // on décrémente le compte USDT de l'acheteur
-      Wallets.update({ _id: USDTwallet._id }, { $inc: { nbCoins: -total } });
-      // on incrémente le compte USDT du vendeur au taux acheté
-      Wallets.update(
-        { owner: sale.owner, code: 'usdt' },
-        { $inc: { nbCoins: total } }
-      );
-      // on incrémente le nbCoins de l'acheteur
-      Wallets.update({ _id: wallet._id }, { $inc: { nbCoins: nbCoins } });
+// on vérifie si on peut acheter avec l'usdt (portefeuille en dollar $)
+if (USDTwallet.nbCoins < total) {
+  throw new Meteor.Error(
+    'not-enough-money',
+    "Vous n'avez pas assez d'argent en $"
+  );
+} else {
+  // Si c'est bon on vend à l'acheteur !
+  Sales.update(
+    { _id: sale._id, buyerId: '' },
+    {
+      $set: {
+        buyerId: Meteor.userId(),
+        buyerUsername: Meteor.user().username,
+      },
     }
+  );
+  // on décrémente le compte USDT de l'acheteur
+  Wallets.update({ _id: USDTwallet._id }, { $inc: { nbCoins: -total } });
+  // on incrémente le compte USDT du vendeur au taux acheté
+  Wallets.update(
+    { owner: sale.owner, code: 'usdt' },
+    { $inc: { nbCoins: total } }
+  );
+  // on incrémente le nbCoins de l'acheteur
+  Wallets.update({ _id: wallet._id }, { $inc: { nbCoins: nbCoins } });
+}
 ```
 
 Si vous avez des questions n'hésitez pas !
 
 ## Debriefing
+
 Alors pas trop dur n'est ce pas ? Meteor est la pour vous simplifier la récupération et l'affichage de données pendant que vous vous concentrez sur le fonctionnel de votre application.
 
 Vous pouvez maintenant commit vos changements, `git checkout etape_4` et lire le **README.md** de cette branche.
