@@ -129,7 +129,7 @@ Analysons les templates.
 {{/each}}
 ```
 
-Le template `list_crypto` permet d'itérer sur un tableau passé dans le helper (que nous ferons juste après) et afficher pour chacun le template `crypto`. Ce dernier va se contenter d'afficher les informations de l'objet en cours d'affichage.
+Le template `list_crypto` permet d'itérer sur un tableau de cryptomonnaies passé dans le helper (que nous ferons juste après) et d'afficher pour chacune des cryptomonnaies le template `crypto`. Ce dernier va se contenter d'afficher les informations de la cryptomonnaie en cours d'itération.
 Ce bloc peut aussi s'écrire sous une forme plus explicite
 
 ```
