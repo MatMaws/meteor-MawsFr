@@ -2,8 +2,6 @@
 
 Un clone de bittrex dans le cadre du cours de CARA
 
-Avant de continuer, créez un compte et logguez vous dessus pour afficher les composants cachés.
-
 ## Objectifs
 - Afficher la liste des cryptomonnaies sur la page d'accueil
 
