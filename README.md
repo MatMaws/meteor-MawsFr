@@ -27,6 +27,7 @@ Insérez ce code dans le fichier `/imports/ui/pages/crypto_details/history/histo
 
 puis dans le fichier `/imports/ui/pages/crypto_details/history/history.html`
 
+
 ## Et voilà, it just works !
 
 Alors c'est pas plaisant de coder avec ce framework avouez ?
