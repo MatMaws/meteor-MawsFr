@@ -190,6 +190,8 @@ Enfin il faut modifier cette variable à chaque fois que l'on saisie une valeur.
   },
 ```
 
+Puis de rajouter {{saleValue}} dans le template au bon endroit.
+
 ## Et voilà, it just works !
 
 Alors c'est pas plaisant de coder avec ce framework avouez ?
