@@ -1,4 +1,4 @@
-# Bitdenver (Etape 2)
+# Bitdenver (Etape 3)
 
 Un clone de bittrex dans le cadre du cours de CARA
 
