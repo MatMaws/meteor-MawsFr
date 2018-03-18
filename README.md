@@ -254,7 +254,7 @@ db.sales.find()
 
 Bon on vous a assez guidé pour la création de template donc on va vous faire bosser un tout petit peu 😜 (Vous aurez la correction dans la branche suivante mais pas de triche hein !)
 
-Vous allez implémenter dans le dossier `/imports/ui/pages/crypto_details` la partie "Acheter" qui est réprésenté par le dossier du template `sale_orders`.
+Vous allez implémenter dans le dossier `/imports/ui/pages/crypto_details` la partie "Acheter" qui est réprésentée par le dossier du template `sale_orders`.
 
 ### Consigne
 
