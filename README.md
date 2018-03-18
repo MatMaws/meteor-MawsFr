@@ -2,19 +2,24 @@
 
 Un clone de bittrex dans le cadre du cours de CARA
 
+Avant tout faire un 
+```
+meteor npm install
+```
+
 ## Objectifs
 - Afficher la liste des cryptomonnaies sur la page d'accueil
 
 ## C'est parti
-En réusmé voici comment on va procéder
+En résumé voici comment on va procéder
 - On créé le schéma de la collection contenant la liste de cryptomonnaie
 - On rempli cette table automatiquement au démarrage du serveur si elle est vide, avec des données sur les cryptomonnaies
 - On publie ces données du côté serveur et on y souscris du côté client
-- On créé et on on inject un composant qui qui va afficher ces données récupérées
+- On créé et on on injecte un composant qui qui va afficher ces données récupérées
 - On utilise les helpers pour les passer au composant
 - On mange une pomme.
 
-### Les schéma de collection
+### Les schémas de collection
 Comme dans une base de données relationnel, il est possible de définir un schéma de table pour spécifier quels sont les champs que notre table peut accepter.
 
 Avec les bases NoSQL comme MongoDB vous n'êtes pas obligé mais c'est **vivement** conseillé car ça vous permet de valider les données que vous aller mettre dans votre table. Si les champs et leur type ne sont pas respecté, le schéma lèvera une exception pour vous sans que vous ayez à lever le petit doigt 😺
@@ -144,9 +149,9 @@ Insérez ensuite
 dans content.html.
 
 ### Affichons les données
-Cette partie regroupe trois gros concepts: la publication, la souscription et les helpers. Vous connaissez déjà l'un des trois, reste à voir es deux autres.
+Cette partie regroupe trois gros concepts: les publications, les souscriptions et les helpers. Vous connaissez déjà l'un des trois, reste à voir les deux autres.
 
-Comme nous l'avons présenté, pour que le client accède aux données de la base du serveur, il faut que celui-ci l'en autorise. Pour cela il doit publier des parties (ou toute) de la base de données.
+Comme nous l'avons présenté, pour que les clients accèdent aux données de la base du serveur, il faut que celui-ci les en autorise. Pour cela il doit publier des parties (ou toute) de la base de données.
 Nous devons donc publier les données de la collections Crypto et Wallets.
 
 Dans un premier temps, insérez ceci dans le fichier `/imports/api/crytocurrency/server/publications.js`
@@ -155,7 +160,8 @@ Meteor.publish('crypto', () => {
   return Crypto.find({});
 });
 ```
-Et voila vous venez de publier "toutes les cryptomonnaies" au monde entier. Reste maintenant à faire en sorte que les clients y accèdent. Pour cela il faut souscrire au flux de publication "crypto".
+Et voila vous venez de publier "toutes les cryptomonnaies" au monde entier 🌍️
+Reste maintenant à faire en sorte que tous les clients qui affichent la page y accèdent (en temps réel je vous le rapelle). Pour cela il faut souscrire au flux de publication "crypto".
 Insérez dans le fichier `/imports/pages/list_cryptos/index.js`
 
 ```js
@@ -164,13 +170,16 @@ Template.list_crypto.onCreated(function() {
 });
 ```
 
-Que fait ce code ? Tout simplement il demande à l'instance du template `list_crypto`, à sa création, de souscrire à la publication déclarée précédemment. Je dis "instance" car il est possible d'avoir plusieurs instance de votre template (bah oui tout l'interêt des templates c'est de pouvoir être réutilisable à plusieurs endroit et donc à chaque fois que vous insérer le template dans une page html avec la balise {{> list_crypto}}, une instance est créé). On peut se référer à l'instance en cours grâce à `this`. 
+Que fait ce code ? Tout simplement il demande à l'instance du template `list_crypto`, à sa création, de souscrire à la publication déclarée précédemment. Je dis "instance" car il est possible d'avoir plusieurs instance de votre template (bah oui tout l'interêt des templates c'est de pouvoir être réutilisable à plusieurs endroits de votre code et donc à chaque fois que vous insérer le template dans une page html avec la balise {{> list_crypto}}, une instance est créé). On peut se référer à l'instance en cours grâce à `this`. 
+
+Ayez bien en tête que chaque client qui souscris à une publication reçoit les même infos que les autres et dès qu'un changement opère sur les données, les clients sont notifiés et téléchargent les nouvelles données et les synchronisent avec leur base locale (le cache MiniMongo). C'est ce qui permet la réactivité de votre site web ✈️
+
 On aurait aussi pu écrire
 ```js
 Meteor.subscribe('crypto');
 ```
 
-Mais adoptez la première version avec `this` pour être habitué car elle permet d'ajouter implicitement des fonctions liées aux souscription notamment la fonction this.subscriptionsReady() qui permet de savoir si les données ont été récupéres afin d'être affichées (pour éviter les nullpointer).
+Mais adoptez la première version avec `this` pour être habitué car elle permet d'ajouter implicitement à votre template des fonctions liées aux souscriptions notamment la fonction this.subscriptionsReady() qui permet de savoir si les données ont été récupéres afin d'être affichées (pour éviter les nullpointer lorsque la données n'est pas encore disponible au chargement d'une page par exemple).
 
 > NB: Si parfois vous avez des problèmes d'affichage c'est que vous n'attendez pas que les données soit chargées pour les afficher. Si ca vous arrive utilisez la condition 
 ```js
@@ -178,7 +187,7 @@ if(this.subscriptionsReady) {
     // afficher les données
 }
 ```
-Ca n'arrive que lorsque vous utilisez des composant non réactif (non fait pour le temps réel) en d'autres termes tous les composants non produits par Meteor ou installés depuis npm.
+Ca n'arrive que lorsque vous utilisez des composants non réactifs (non fait pour le temps réel) en d'autres termes tous les composants non produits par Meteor ou installés depuis npm (ChartJs que nous utiliserons).
 
 ##### Bon on les affiche ces données ?
 On se calme 💣️
@@ -225,4 +234,5 @@ Il reste maintenant à faire la même chose pour Wallets.
 Vous êtes grand.
 
 ### Insertion de données d'exemple
-Vous pourriez faire des appels REST sur coinmarketcap pour récupérer la liste des cryptomonnaie mais ce n'est pas l'objet ici. On vous a donc concocté un script `/imports/startup/server/initdb.js` qui s'execute à chaque démarrage de votre serveur et qui vérifie que la collections Crypto n'est pas vide sinon il la rempli avec des données d'exemple.
+Vous pourriez faire des appels REST sur coinmarketcap pour récupérer la liste des cryptomonnaie mais ce n'est pas l'objet ici. On vous a donc concocté un script `/imports/startup/server/initdb.js` qui s'execute au démarrage de votre serveur et qui vérifie que la collections Crypto n'est pas vide sinon il la rempli avec des données d'exemple.
+
