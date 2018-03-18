@@ -86,7 +86,7 @@ Simple non ?
 ### Afficher des données
 
 Nous allons maintenant afficher une données récupérée depuis le JS. Cela vous sera très utile pour afficher des données de la base de données.
-Allez dans le fichier `/imports/ui/navbar/index.js` et écrivez
+Allez dans le fichier `/imports/ui/components/navbar/index.js` et écrivez y (à la suite)
 
 ```js
 Template.navbar.helpers({
