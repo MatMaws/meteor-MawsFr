@@ -98,7 +98,7 @@ Vous pouvez maintenant cliquer sur l'une des cryptomonnaie de la page d'accueil 
 Pour l'instant le bouton "Valider" ne permet pas de créer un ordre de vente.
 Vous pourriez utiliser JQuery (bah oui, ca reste du JS avant tout !) mais il y'a mieux. Vous avez utilisé les helpers tout à l'heure, et bien vous avez la même chose avec les events !
 
-Voici le code du template "Vendre":
+Voici le code du template "Vendre" qui se trouve dans le fichier `/imports/ui/pages/crypto_details/sell_panel/index.js`
 
 ```html 
 <template name="sell_panel">
