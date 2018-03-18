@@ -37,7 +37,7 @@ Plus sérieusement, votre application va tourner sur votre PC à vous et personn
 
 Nous avons donc hébergé l'appli final pour que vous puissiez tester. Sinon vous pouvez la tester avec deux navigateur ou un navigateur en mode privé et un autre en mode normal, ça fonctionne aussi ;)
 
-- [ ] Mettre le lien vers l'appli
+[PAR ICI](http://vps475963.ovh.net:3012/)
 
 ### Objectifs
 
