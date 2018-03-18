@@ -2,12 +2,21 @@
 Dans cette partie, nous allons voir ensemble ce que l'on va faire durant ces 2 dernières heures (2 j'ai raison ?).
 
 >Sachez que Meteor est vraiment facile d'utilisation car il propose plein de packages tout fait qui vous rendent **très** productif. Il a été très dur pour nous de vous trouver un sujet qui vous fasse tenir 2h donc désolé si le sujet vous semble pas intéressant (on vous avait pourtant demandé ce qui vous interesserait 😝)
+## Contexte globale
+Nous voulons créer un site ou l'on va pouvoir acheter et vendre des cryptomonnaies (Crypto).
+Les utilisateurs disposeront d'un portefeuille (Wallet) en dollar (qui sera de 76544 usdt (ou dollars) à l'inscription, oui c'est très généreux 💲💲💲) et qui permettra d'acheter des cryptomonnaies. L'utilisateur disposera aussi d'un portefeuille PAR cryptomonnaie qui permettra de stocker ses achat (Sales (même table que les ventes)). Il peut aussi choisir de vendre (Sales) des cryptomonnaie. Pour cela il entre un nombre de coins à vendre. Un coin à une valeur en dollars dont si je vendre 1 bitcoin à 10000 usdt l'acheteur doit disposer d'au moins 10000$. Lorsque l'on pose un ordre de vente, nous somme débité imédiatement des coins mis en vente jusqu'à l'achat par un acheteur, qui nous crédite en dollars (usdt) à l'issue de cette vente. 
+
+Nous aurons donc trois pages
+- La page d'accueil avec la liste des cryptomonnaies
+- Une page de description de cryptomonnaie permettant d'en voir l'écolution et d'effectuer des transaction
+- Une page (facultative) qui liste les ordres de ventes que l'on peut annuler.
+  - Cette partie ne sera pas corrigé, vous êtes libre de la faire ou non
 
 ## Résumé des fonctionnalités
 Voici ce l'application doit faire au final :
 - Afficher une liste des cryptomonnaies
 - Pouvoir cliquer sur l'une d'elle pour afficher sa fiche et son évolution en **temps réel** grâce à un graphique
-- Pouvoir gérer des utilisateurs (avec Meteor c'est 2 à 5 lignes dont un import selon vos envie de configuration !!)
+- Pouvoir gérer l'inscription et l'authentification (avec Meteor c'est 2 à 5 lignes dont un import selon vos envie de configuration !!)
 - Pouvoir poser un ordre d'achat
 - Pouvoir répondre à un ordre d'achat
 - Voir la liste des transactions effectuées
