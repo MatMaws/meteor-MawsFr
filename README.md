@@ -3,245 +3,285 @@
 Un clone de bittrex dans le cadre du cours de CARA
 
 ## Objectifs
-- Afficher la liste des cryptomonnaies sur la page d'accueil
+- Simuler de l'activité sur notre site pour constater la réactivité
+- Faire une nouvelle page et gérer le routing vers celle-ci
 
-## C'est parti
-En résumé voici comment on va procéder
-- On créé les collection Crypto (contenant la liste des cryptomonnaies) et Wallets (contenant les portfeuille des utilisateurs) ainsi que leurs schémas 
-- On rempli cette table automatiquement au démarrage du serveur si elle est vide, avec des données sur les cryptomonnaies (en prenant soint de créer un portefeuille par cryptomonnaie + le portefeuille en dollars)
-- On publie ces données du côté serveur et on y souscris du côté client
-- On créé et on on injecte un composant qui qui va afficher ces données récupérées
-- On utilise les helpers pour les passer au composant
-- On mange une pomme.
+## Bébé t'as déjà simulé ?
+Que diriez de mettre à jour en temps réel (avec des données random bien sûr) les taux des monnaies affichés sur la page d'acceuil ?
 
-### Les schémas de collection
-Comme dans une base de données relationnel, il est possible de définir un schéma de table pour spécifier quels sont les champs que notre table peut accepter.
+Allez voir le fichier `imports/api/crytocurrency/server/simulator.js`
 
-Avec les bases NoSQL comme MongoDB vous n'êtes pas obligé mais c'est **vivement** conseillé car ça vous permet de valider les données que vous aller mettre dans votre table. Si les champs et leur type ne sont pas respecté, le schéma lèvera une exception pour vous sans que vous ayez à lever le petit doigt 😺
+Vous remarquez que ce fichier est chargé seulement du côté serveur, donc c'est bien le serveur qui met à jour la données dans la bdd.
 
-Vous pouvez aller jeter un coup d'oeil au fichier `/imports/api/crytocurrency/crytocurrency.js`. On y a défini le schéma représentant une cryptomonnaie que l'on a associé à la collection `Crypto`. On vous laisse lire les commentaire même si on pense que vous savez tous ce qu'est un schéma de table..
+Que fait ce script ? Il génère tout simplement un nouveaux taux aléatoirement pour chaque cryptomonnaie.
+Pour activer le script changer `false` à `true` et aller sur votre [site](localhost:3000).
 
-Nous avons aussi définit un shéma de collection `Wallets` pour le portefeuille d'un utilisateur. Comme vous l'avez compris, l'utilisateur possède **un** portefeuille pour **chaque** cryptomonnaie + un portefeuille en dollars (usdt) qui permet d'acheter des cryptomonnaie.
-Donc allez aussi voir le fichier `/imports/api/wallets/wallets.js`.
+Vous avez là un exemple de réactivité car si vous  ouvrez à côté un autre navigateur en mode privé (ou votre chrome sur votre portable) et vous verrez que la données se met à jour en temps réel chez tout le monde !
 
-Remarquez que nous déclarons nos collections dans leurs fichiers respectifs avec
+On pourrai très bien remplacer ce code par un appel REST 😊 (Mais nous ne le faisons pas car on a peur des imprévu avec le proxy etc ..).
+
+## Afficher une nouvelle page
+Il existe plusieurs librairie de routing pour Meteor qui lui préconise d'utiliser FlowRouter combiné avec BlazeLayout. Nous les avons déjà intégré dans le projet ;) (rapellez vous le gros meteor npm install)
+
+Avec FlowRouter permet de définir des fonctions qui vont être exécutées selon l'url tandis que BlazeLayout va permettre de choisir le composant à afficher à l'endroit ou l'on veut.
+
+Regardez le fichier `imports/startup/client/routes.js`
 ```js
-export const Crypto = new Mongo.Collection('crypto');
+// Page d'accueil
+FlowRouter.route('/', {
+  name: 'Crypto.showAll',
+  action(params, queryParams) {
+    BlazeLayout.render('app', { main: 'list_crypto' });
+  },
+});
 ```
-et
+
+Nous avons défini une route `/` vers la page d'accueil. (le surnom `Crypto.showAll` ne nous servira pas). A chaque fois que vous afficherez la page d'accueil, la fonction `action` sera appelée.
+
+Regardons de plus près la partie
 ```js
-export const Wallets = new Mongo.Collection('wallets');
+BlazeLayout.render('app', { main: 'list_crypto' });
 ```
 
-### Création des portefeuilles pour un nouvel utilisateur
-Quand un utilisateur est créé, il faut initialiser ses portefeuilles.
+Cette veut dire "Injecte le template `app` dans le body et modifie sa partie dynamique que j'ai appelé `main` pour y afficher `list_crypto`.
 
-Dans le fichier `/imports/startup/server/wallets-hook.js` vous pouvez voir que l'on se sert de la fonction `Accounts.onCreateUser` pour intercepter la création d'un utilisateur et que dans le corps de cette fonction on ajoute le portefeuille en dollar et un portefeuille par cryptomonnaie grace à une boucle.
+De ce fait nous avons du modifier un peu le code HTML pour que cela fonctionne.
+Dans le fichier `/imports/ui/layouts/app.html` nous avons enlevé l'injection du template `app` (car BlazeLayout le fait à notre place) et dans le fichier `/imports/ui/components/content/content.html` nous avons ajouté le template dynamique `main` avec
 
-### Affichage des cryptomonnaies
-Insérez le template suivant dans le fichier `/imports/ui/pages/list_cryptos/list_crypto.html`
-```html
-<template name="list_crypto">
-    <div class="row">
-        <!-- liste des cryptos -->
-        {{#each cryptos}}
-            {{> crypto}}
-        {{/each}}
-        <!-- Ordres de ventes -->
-    </div>
-</template>
+```
+{{> Template.dynamic template=main}}
+```
 
-<template name="crypto">
-    <div class="col s8 m8 offset-s2 offset-m2">
-        <div class="card horizontal hoverable">
-            <div class="card-image crypto-img">
-                <a href="/crypto/{{code}}">
-                    <img class="responsive-img" src="/img/cryptos/{{code}}.png"> </a>
-            </div>
-            <div class="card-stacked">
-                <div class="card-content">
-                    <div class="col s5">
-                        <div class="col s12 m12">
-                            <h3>
-                                <a href="/crypto/{{code}}">{{name}}</a>
-                            </h3>
-                        </div>
-                        {{#if currentUser}}
-                        <div class="col s12 m12">
-                            <div class="card-action col s6 m6">
-                                <a href="/crypto/{{code}}#buy">Acheter</a>
-                            </div>
-                            <div class="card-action col s6 m6">
-                                <a href="/crypto/{{code}}#sell">Vendre</a>
-                            </div>
-                        </div>
-                        {{/if}}
-                    </div>
-                    <div class="col s7">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Volume</th>
-                                    <th>Taux</th>
-                                    {{#if currentUser}}
-                                    <th>Portefeuille</th>
-                                    {{/if}}
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>{{volume}}</td>
-                                    <td>{{dollarValue}}</td>
-                                    {{#if currentUser}}
-                                    <td>{{inWallet}} {{code}}</td>
-                                    {{/if}}
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+Sachez que vous pouvez avoir plusieurs template dynamique dans votre site. Il faut qu'au moment d'y injecter un template avec BlazeLayout, vous ayez spécifié le même nom que celui définit après `template=`.
+
+Enfin nous vous avons concoté un petit template `/imports/ui/pages/list_cryptos/list_crypto.html` qui permet de voir le détail d'une cryptomonnaie et d'effectuer des transactions. (Excusez nous pour le mauvais goût en design 🤮).
+
+Créez une route vers cette page !
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+.
+
+C'est bon ? voici la solution
+```js
+// Page de détails d'une crypto monnaie
+FlowRouter.route('/crypto/:code', {
+  name: 'Crypto.show',
+  action(params, queryParams) {
+    console.log('Détails de ' + params['code'] + '!!');
+    BlazeLayout.render('app', { main: 'crypto_details' });
+  },
+});
+```
+
+Vous apercevez dans ce petit bout de code que l'on passe un paramètre `:code` dans l'url. Celui ci est récupérable dans la variable params en faisant
+```js
+params.code // ou params['code']
+```
+
+Vous pouvez aussi faire passer des paramètre de requete de cette manière `/crypto/:code?sort=:sort` et les récupérer de la même manière grâce à la variable queryParams.
+
+Vous pouvez maintenant cliquer sur l'une des cryptomonnaie de la page d'accueil pour voir votre nouvelle page s'afficher ✨ !
+
+## Clic clic !
+Pour l'instant le bouton "Valider" ne permet pas de créer un ordre de vente.
+Vous pourriez utiliser JQuery (bah oui, ca reste du JS avant tout !) mais il y'a mieux. Vous avez utilisé les helpers tout à l'heure, et bien vous avez la même chose avec les events !
+
+Voici le code du template "Vendre":
+
+```html 
+<template name="sell_panel">
+    <div class="col s6 m6">
+        <h2 id="sell">Vendre</h2>
+        <form id="sellForm" class="col s12">
+            <div class="row">
+                <div class="input-field col s3 m4">
+                    <input placeholder="ex: 1" min="0" step="any" id="nbCoins" name="nbCoins" type="number" class="validate" required/>
+                    <label for="first_name">Nombre de {{infos.code}}</label>
                 </div>
+                <div class="input-field col s4">
+                    <label>Total en $ : {{totalDollar}}</label>
+                </div>
+                <input class="input-field col s2 btn waves-effect waves-light" type="submit" name="sell" value="Vendre" />
+                <input class="input-field col s2 btn waves-effect waves-light red" id="reset" type="reset" value="Effacer" />
             </div>
-        </div>
+        </form>
     </div>
 </template>
 ```
 
-#### Le block {{# if}}
-Comme l'avez deviné tout ce qui est dans un bloc
+Ce qu'il faut remarquer c'est que nous avons un formulaire d'id `sellForm`, un input avec l'attribut name de valeur `nbCoins`, un label qui sera censé affiché la valeur en dollar de ce que vous tapez et un bouton pour valider la vente et un pour remettre à zéro la saisie.
+
+Nous avons aussi créé pour vous une nouvelle collection du doux nom de Sales qui contiendra les ordres de vendres (en vente et vendu). La règle de gestion est que si le champs `buyerId` est vide c'est qu'il n'y a pas eu d'achat sinon c'est qu'il y a eu une réponse à l'ordre de vente.
 ```
-{{#if condition}}
-    contenu conditionnel
-{{/if}}
-```
-
-est affiché si la condition est respectée.
-Ainsi on peut voir que l'on se sert de la variable currentUser (importée automatiquement avec le package qui vous a facilité l'authent) pour afficher ou pas certaines partie de la page.
-Si un utilisateur n'est pas connecté, certaines informations n'ont pas a être affichée.
-
-#### Le block {{# each}}
-Rappel: Nous voulons sur la page d'accueil la liste des cryptomonnaies sous forme de carte contenant certaines informations. Nous devons donc itérer sur chaque cryptomonnaie pour afficher sa description. 
-
-Analysons les templates. 
-
-```
-{{#each cryptos}}
-    {{> crypto}}
-{{/each}}
+buyerId = "" => En cours de vente
+buyerId = "<l'id de lacheteur>" => Vendu
 ```
 
-Le template `list_crypto` permet d'itérer sur un tableau de cryptomonnaies passé dans le helper (que nous ferons juste après) et d'afficher pour chacune des cryptomonnaies le template `crypto`. Ce dernier va se contenter d'afficher les informations de la cryptomonnaie en cours d'itération.
-Ce bloc peut aussi s'écrire sous une forme plus explicite
+Allez dans le fichier `/imports/ui/pages/crypto_details/sell_panel/index.js` et observez y le code suivant
 
 ```
-{{#each cryptomonnaie in cryptos}}
-    {{> crypto}}
-{{/each}}
-```
-La variable cryptomonnaie est implicitement déclarée et passée au template `crypto`.
+Template.sell_panel.events({
+  'submit #sellForm'(event) {
+    event.preventDefault(); // pour éviter de rafraichir la page au moment du clic
+    // On créé notre objet en récupérant les bonne valeurs
+    let sale = {
+      code: FlowRouter.getParam('code'), // on récupère le code de la monnaie depuis l'url
+      nbCoins: event.target.nbCoins.value, // on récupère la valeur saisie dans le champs qui à l'attribut name = à nbCoins
+      dollarValue: Crypto.findOne({ code: FlowRouter.getParam('code') })
+        .dollarValue, // on va chercher le taux en dollar de la monnaie
+      owner: Meteor.userId(), // On récupère l'id du user actuel
+      username: Meteor.user().username, // On récupère le pseudo du user actuel
+    };
+    console.log (sale);
 
-Insérez ensuite dans `imports/ui/components/content/content.html`
-```
-{{> list_crypto}}
-```
-
-### Affichons les données
-Cette partie regroupe trois gros concepts: les publications, les souscriptions et les helpers. Vous connaissez déjà l'un des trois, reste à voir les deux autres.
-
-Comme nous l'avons présenté, pour que les clients accèdent aux données de la base du serveur, il faut que celui-ci les en autorise. Pour cela il doit publier des parties (ou toute) de la base de données.
-Nous devons donc publier les données de la collections Crypto et Wallets.
-
-Dans un premier temps, insérez ceci dans le fichier `/imports/api/crytocurrency/server/publications.js`
-```js
-Meteor.publish('crypto', () => {
-  return Crypto.find({});
-});
-```
-Et voila vous venez de publier "toutes les cryptomonnaies" au monde entier 🌍️ Le nom du flux est au choix, nous avons choisi de mettre `crypto` mais vous pouvez très mettre `crypto.getAll` ou `jmleskebab` 🥪 
-
-Reste maintenant à faire en sorte que tous les clients qui affichent la page y accèdent (en temps réel je vous le rapelle). Pour cela il faut souscrire au flux de publication "crypto".
-Insérez dans le fichier `/imports/ui/pages/list_cryptos/index.js`
-
-```js
-Template.list_crypto.onCreated(function() {
-    this.subscribe('crypto');
-});
-```
-
-Que fait ce code ? Tout simplement il demande à l'instance du template `list_crypto`, à sa création, de souscrire à la publication déclarée précédemment. Je dis "instance" car il est possible d'avoir plusieurs instance de votre template (bah oui tout l'interêt des templates c'est de pouvoir être réutilisable à plusieurs endroits de votre code et donc à chaque fois que vous insérer le template dans une page html avec la balise {{> list_crypto}}, une instance est créé). On peut se référer à l'instance en cours grâce à `this`.
-
-> Attention à ne pas utiliser la notation lambda de javascript `() => {}` et de bien laisser `function` ! Sinon `this` ne pointera pas sur le template
-
-Ayez bien en tête que chaque client qui souscris à une publication reçoit les même infos que les autres et que dès qu'un changement opère sur les données, les clients sont notifiés et téléchargent les nouvelles données et les synchronisent avec leur base locale (le cache MiniMongo). C'est ce qui permet la réactivité de votre site web ✈️
-
-On aurait aussi pu écrire
-```js
-Meteor.subscribe('crypto');
-```
-
-Mais adoptez la première version avec `this` pour être habitué car elle permet d'ajouter implicitement à votre template des fonctions liées aux souscriptions notamment la fonction this.subscriptionsReady() qui permet de savoir si les données ont été récupéres afin d'être affichées (pour éviter les nullpointer lorsque la données n'est pas encore disponible au chargement d'une page par exemple).
-
-> NB: Si parfois vous avez des problèmes d'affichage c'est que vous n'attendez pas que les données soit chargées pour les afficher. Si ca vous arrive utilisez la condition 
-```js
-if(this.subscriptionsReady) {
-    // afficher les données
-}
-```
-Ca n'arrive que lorsque vous utilisez des composants non réactifs (non fait pour le temps réel) en d'autres termes tous les composants non produits par Meteor ou installés depuis npm (ChartJs que nous utiliserons).
-
-##### Bon on les affiche ces données ?
-On se calme 💣️
-
-Il faut maintenant implémenter le helper qui va envoyer les données souscrits vers le template.
-
-Je vous laisse faire.
-
-.
-
-.
-
-.
-
-.
-
-.
-
-.
-
-.
-
-C'est bon ?
-Voici la solution
-
-Dans `/imports/ui/pages/list_cryptos/index.js`
-```
-Template.list_crypto.helpers({
-  cryptos() {
-    return Crypto.find();
-  },
-});
-
-Template.crypto.helpers({
-  inWallet() {
-    return Wallets.findOne({
-      $and: [{ code: this.code }, { owner: Meteor.userId() }],
-    }).nbCoins;
+    // Insérer l'appel à la méthode Sales.sell
   },
 });
 ```
 
-Il reste maintenant à faire la même chose pour Wallets.
-Vous êtes grand.
+Les commentaires parlent d'eux même. Le plus important ici est d'utiliser l'objet sale généré par nos soins pour l'insérer en base du côté serveur. Mais comment faire ? Si vous avez écoutez la présentation, vous avez dû entendre parler des Méthodes !
 
-### Insertion de données d'exemple
-Vous pourriez faire des appels REST sur coinmarketcap pour récupérer la liste des cryptomonnaie mais ce n'est pas l'objet ici. On vous a donc concocté un script `/imports/startup/server/initdb.js` qui s'execute au démarrage de votre serveur et qui vérifie que la collections Crypto n'est pas vide sinon il la rempli avec des données d'exemple. Celui ci devrait s'executer si vous redémarrez votre serveur.
+### Insérer en base avec les méthodes
+Une méthode est une fonction définit du côté client **ET** serveur. Cette fonction nous rapelle un peu les webservice que l'on code: Le serveur expose des webservices et le client les appelles.
 
-Et voila une belle page d'accueil !
+Pour déclarer une méthode qui permet d'insérer un objet sale dans la pase collection Sales, insérer le code suivant dans le fichier `/imports/api/sales/methods.js`
+
+```js
+Meteor.methods({
+  // Permet de vendre de la monnaie
+  'Sales.sell'(sale) {
+      Sales.insert(sale); // ajout de la vente
+    }
+  }
+});
+```
+
+Voila comment on déclare des méthodes. Mais ATTENDEZ NE CLIQUEZ SUR RIEN ! Sinon vous allez insérer des données non cohérentes. Il faut quand même vérifier si le portefeuille de l'utilisateur permet cette transaction. Voici une version un peu plus complète
+```js
+Meteor.methods({
+  // Permet de vendre de la monnaie
+  'Sales.sell'(sale) {
+    // le nombre de coins à vendre
+    const nbCoins = sale.nbCoins;
+
+    // le portefeuille du vendeur pour la monnaie spécifique
+    const wallet = Wallets.findOne({
+      $and: [{ code: sale.code }, { owner: sale.owner }],
+    });
+
+    if (wallet.nbCoins < nbCoins) {
+      // Si le le vendeur veut vendre plus que ce qu'il ne possède, on le fouette généreusement d'une erreur assaisonée
+      throw new Meteor.Error(
+        'not-enough-money',
+        "Vous n'avez pas assez de coins"
+      );
+    } else {
+      // sinon on lui prend la thunes en attendant un acheteur
+      Wallets.update({ _id: wallet._id }, { $inc: { nbCoins: -nbCoins } }); // baisse de la valeur du portefeuille
+      Sales.insert(sale); // ajout de la vente
+    }
+  },
+
+});
+```
+
+On vous laisse lire les commentaire 😇
+
+Ensuite pour appeler cette méthode du côté client il suffit d'écrire
+```js
+Meteor.call('Sales.sell', sale);
+```
+
+de la même manière voici une version plus complète à mettre à l'emplacement du TODO dans `/imports/ui/pages/crypto_details/sell_panel/index.js`:
+
+```js
+Meteor.call('Sales.sell', sale, (err, res) => {
+    if (err) {
+    Materialize.toast(err.reason, 4000, 'rounded');
+    } else {
+    Materialize.toast(
+        "Ordre de vente validé, en attente d'achat!",
+        4000,
+        'rounded'
+    );
+    event.target.nbCoins.value = '';
+    }
+});
+```
+
+## Exercice
+Bon on vous a assez guidé pour la création de template donc on va vous faire bosser un tout petit peu :) (Vous aurez la correction dans la branche suivante mais pas de triche hein !)
+
+Vous allez implémenter dans le dossier `/imports/ui/pages/crypto_details` la partie "Acheter" qui est réprésenté par le dossier du template `sale_orders`
+
+### Consigne
+
+Affichez la liste des ordres de ventes (sauf celle de l'utilisateur connecté) avec un bouton acheter qui permet de répondre à un ordre de vente.
+
+### Indications
+Pour vous aider, vous aurez besoin de :
+- Meteor.userId() permet de récupérer du côté client **MAIS AUSSI** serveur l'id de l'utilisateur connecté et qui à fait l'action
+- La publication et la souscription de la collection Sales à déjà été faite pour vous donc vous pouvez utiliser la collection du côté client pour faire des requête dessus.
+    - D'ailleurs la souscription à été faite dans le template parent `crypto_details` qui transmet à tout les template enfants dont `saleOrders`
+- Vous devez utiliser un helper pour récupérer les ordres de ventes de la consigne
+- Vous devez créer un event qui répondra au clic du bouton "Acheter".
+    - Utilisez l'évenement 'click .buyButton'
+- Vous devez créer une Méthode 'Sales.buy' et l'apeller
+    - Le code d'un achat est le suivant:
+```js
+const wallet = Wallets.findOne({
+      $and: [{ code: sale.code }, { owner: Meteor.userId() }],
+    });
+    const USDTwallet = Wallets.findOne({
+      $and: [{ code: 'usdt' }, { owner: Meteor.userId() }],
+    });
+    const nbCoins = sale.nbCoins;
+    const total = sale.nbCoins * sale.dollarValue;
+
+    // on vérifie si on peut acheter avec l'usdt (portefeuille en dollar $)
+    if (USDTwallet.nbCoins < total) {
+      throw new Meteor.Error(
+        'not-enough-money',
+        "Vous n'avez pas assez d'argent en $"
+      );
+    } else {
+      // Si c'est bon on vend à l'acheteur !
+      Sales.update(
+        { _id: sale._id, buyerId: '' },
+        {
+          $set: {
+            buyerId: Meteor.userId(),
+            buyerUsername: Meteor.user().username,
+          },
+        }
+      );
+      // on décrémente le compte USDT de l'acheteur
+      Wallets.update({ _id: USDTwallet._id }, { $inc: { nbCoins: -total } });
+      // on incrémente le compte USDT du vendeur au taux acheté
+      Wallets.update(
+        { owner: sale.owner, code: 'usdt' },
+        { $inc: { nbCoins: total } }
+      );
+      // on incrémente le nbCoins de l'acheteur
+      Wallets.update({ _id: wallet._id }, { $inc: { nbCoins: nbCoins } });
+    }
+```
+
+Si vous avez des questions n'hésitez pas !
 
 ## Debriefing
-En général vous ne ferait que ça, publier des données, souscrire à des publications et vous servir des helpers pour transférer ces données au template que vous affichez.
+Alors pas trop dur n'est ce pas ? Meteor est la pour vous simplifier la récupération et l'affichage de données pendant que vous vous concentrez sur le fonctionnel de votre application.
 
-Vous pouvez maintenant commit vos changements, `git checkout etape_3` et lire le **README.md** de cette branche.
-
-
+Vous pouvez maintenant commit vos changements, `git checkout etape_4` et lire le **README.md** de cette branche.
 
 

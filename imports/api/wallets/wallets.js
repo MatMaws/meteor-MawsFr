@@ -25,16 +25,16 @@ Wallets.schema = new SimpleSchema({
   },
   code: {
     type: String,
-    label: 'Le code de la monnaie à laquelle est associée ce portefeuille) (ex: btc, ...)',
+    label: 'Le code de la monnaie',
   },
   nbCoins: {
     type: Number,
-    label: "Le nombre d'unité possédé dans le portefeuille",
+    label: "Le nombre d'unité",
     min: 0,
   },
   owner: {
     type: String,
-    label: "L'id du possesseur (user) du portefeuille",
+    label: "L'id du compte associé au portefeuille",
   },
   username: {
     type: String,

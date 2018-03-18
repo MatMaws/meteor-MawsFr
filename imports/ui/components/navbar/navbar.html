@@ -5,23 +5,22 @@
                 <img id="logo" src="/img/denverlogo.png" />
             </a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <!-- TODO : rendre visible seulement à un utilisateur connecté -->
+                {{#if currentUser}}
                 <li>
-                    Portefeuille: {{dollarWallet}} {{currency}}
+                    Portefeuille: {{dollarWallet}} $
                 </li>
+                {{/if}}
                 <li>
                     <a href="/">Cryptomonnaies</a>
                 </li>
-                <!-- TODO : rendre visible seulement à un utilisateur connecté -->
+                {{#if currentUser}}
                 <li>
                     <a href="/sales">Mes ordres de vente
-                        <span class="new badge" data-badge-caption="en cours">0
-                            <!-- TODO : Afficher mon nombre d'ordre de vente -->
-                        </span>
+                        <span class="new badge" data-badge-caption="en cours">{{salesCount}}</span>
                     </a>
                 </li>
+                {{/if}}
                 <li>
-                    <!-- TODO : Injectez le bouton d'authentification -->
                     {{> loginButtons}}
                 </li>
             </ul>

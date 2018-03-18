@@ -1,0 +1,18 @@
+<template name="sell_panel">
+    <div class="col s6 m6">
+        <h2 id="sell">Vendre</h2>
+        <form id="sellForm" class="col s12">
+            <div class="row">
+                <div class="input-field col s3 m4">
+                    <input placeholder="ex: 1" min="0" step="any" id="nbCoins" name="nbCoins" type="number" class="validate" required/>
+                    <label for="first_name">Nombre de {{infos.code}}</label>
+                </div>
+                <div class="input-field col s4">
+                    <label>Total en $ : {{totalDollar}}</label>
+                </div>
+                <input class="input-field col s2 btn waves-effect waves-light" type="submit" name="sell" value="Vendre" />
+                <input class="input-field col s2 btn waves-effect waves-light red" id="reset" type="reset" value="Effacer" />
+            </div>
+        </form>
+    </div>
+</template>

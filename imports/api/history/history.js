@@ -1,11 +1,10 @@
 import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
 
-// On crée la collection Crypto
-export const Crypto = new Mongo.Collection('crypto');
+// On crée la collection History
+export const History = new Mongo.Collection('history');
 
-// On interdit les requetes direct sur la bdd depuis le client car on utilise les Méthodes pour le faire
-Crypto.deny({
+History.deny({
   insert() {
     return true;
   },
@@ -18,32 +17,25 @@ Crypto.deny({
 });
 
 // On créé le schéma
-Crypto.schema = new SimpleSchema({
+History.schema = new SimpleSchema({
   _id: {
     type: String,
     regEx: SimpleSchema.RegEx.Id,
-    label: "l'id de la cryptomonnaie",
   },
   code: {
     type: String,
     label:
       'Les trois ou quatre lettres représentant la monnaie (eg. btc, xlm, ...)',
   },
-  name: {
-    type: String,
-    label: 'Le nom de la monnaie',
+  dollarValues: {
+    type: Array, // Le type est une liste de valeur (les taux à historiser)
+    label: 'Les taux historisés',
   },
-  volume: {
+  'dollarValues.$': {
+    // ici on défini de quel type seront les éléments du tableau ci dessus (avant on écrivait [Number] directement dans la déclaration ci dessus)
     type: Number,
-    label: 'Le capital que possède Bitdenver en cette monnaie',
-    min: 0,
-  },
-  dollarValue: {
-    type: Number,
-    label: "Le taux en dollar d'une unité de la monnaie",
-    min: 0,
   },
 });
 
 // On attache le schéma à la collection. De ce fait, lors de l'insertion, une validation automatique des données sera faite selon les contraintes.
-Crypto.attachSchema(Crypto.schema);
+History.attachSchema(History.schema);

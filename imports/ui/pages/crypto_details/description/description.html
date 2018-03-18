@@ -1,0 +1,40 @@
+<template name="description">
+    <div class="card horizontal hoverable">
+        <div class="card-image crypto-img">
+            <img class="responsive-img" src="/img/cryptos/{{infos.code}}.png">
+        </div>
+        <div class="card-stacked">
+            <div class="card-content">
+                <div class="col s5">
+                    <div class="col s12 m12">
+                        <h3>
+                            {{infos.name}}
+                        </h3>
+                    </div>
+                </div>
+                <div class="col s7">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Volume ($)</th>
+                                <th>Taux ($)</th>
+                                {{#if currentUser}}
+                                <th>Portefeuille</th>
+                                {{/if}}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{infos.volume}}</td>
+                                <td>{{infos.dollarValue}}</td>
+                                {{#if currentUser}}
+                                <td>{{wallet.nbCoins}} {{infos.code}}</td>
+                                {{/if}}
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

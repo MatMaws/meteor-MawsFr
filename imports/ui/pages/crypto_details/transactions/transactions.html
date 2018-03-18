@@ -1,0 +1,30 @@
+<template name="transactions">
+    <h2>Transactions</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre d'unité ({{infos.code}})</th>
+                <th>Taux ($)</th>
+                <th>Total ($)</th>
+                <th>Vendeur</th>
+                <th>Acheteur</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{# each transactions}}
+                {{> transaction}}
+            {{/each}}
+        </tbody>
+    </table>
+</template>
+
+<!-- Le template pour une ligne du tableau de vente et de transactions -->
+<template name="transaction">
+    <tr>
+        <td>{{nbCoins}}</td>
+        <td>{{dollarValue}}</td>
+        <td>{{total}}</td>
+        <td>{{username}}</td>
+        <td>{{buyerUsername}}</td>
+    </tr>
+</template>    

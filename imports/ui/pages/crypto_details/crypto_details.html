@@ -1,0 +1,21 @@
+<!-- Le template de la page de détail d'une cryptomonnaie -->
+<template name="crypto_details">
+    <div class="row">
+        <!-- Le détail de la cryptomonnaie-->
+        {{> description}}
+    </div>
+
+    {{#if currentUser}}
+    <div class="row">
+        <!-- Le panel de création d'ordre de vente -->
+        {{> sell_panel}}
+        <!-- Le panneau des ordres de ventes en cours -->
+        {{> saleOrders}}
+    </div>
+    {{/if}}
+
+    <div class="row">
+        <!-- La liste des transactions -->
+        {{> transactions}}
+    </div>
+</template>

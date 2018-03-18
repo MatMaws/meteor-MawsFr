@@ -1,0 +1,63 @@
+<template name="list_crypto">
+    <div class="row">
+        <!-- liste des cryptos -->
+        {{# each cryptos}} 
+            {{> crypto}}
+        {{/each}}
+        <!-- Ordres de ventes -->
+    </div>
+</template>
+
+<template name="crypto">
+    <div class="col s8 m8 offset-s2 offset-m2">
+        <div class="card horizontal hoverable">
+            <div class="card-image crypto-img">
+                <a href="/crypto/{{code}}">
+                    <img class="responsive-img" src="/img/cryptos/{{code}}.png"> </a>
+            </div>
+            <div class="card-stacked">
+                <div class="card-content">
+                    <div class="col s5">
+                        <div class="col s12 m12">
+                            <h3>
+                                <a href="/crypto/{{code}}">{{name}}</a>
+                            </h3>
+                        </div>
+                        {{#if currentUser}}
+                        <div class="col s12 m12">
+                            <div class="card-action col s6 m6">
+                                <a href="/crypto/{{code}}#buy">Acheter</a>
+                            </div>
+                            <div class="card-action col s6 m6">
+                                <a href="/crypto/{{code}}#sell">Vendre</a>
+                            </div>
+                        </div>
+                        {{/if}}
+                    </div>
+                    <div class="col s7">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Volume</th>
+                                    <th>Taux</th>
+                                    {{#if currentUser}}
+                                    <th>Portefeuille</th>
+                                    {{/if}}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{{volume}}</td>
+                                    <td>{{dollarValue}}</td>
+                                    {{#if currentUser}}
+                                    <td>{{inWallet}} {{code}}</td>
+                                    {{/if}}
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
