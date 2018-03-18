@@ -40,3 +40,6 @@ J'espère que la vidéo vous a plus, si c'est le cas, n'hésitez pas à lacher u
 
 # Le vrai mot de la fin
 Kebab.
+
+# Code complet
+`git checkout site_complet`
