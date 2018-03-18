@@ -15,7 +15,7 @@ En résumé voici comment on va procéder
 - On mange une pomme.
 
 ### Les schémas de collection
-Comme dans une base de données relationnel, il est possible de définir un schéma de table pour spécifier quels sont les champs que notre table peut accepter.
+Comme dans une base de données relationnelles, il est possible de définir un schéma de table pour spécifier quels sont les champs que notre table peut accepter.
 
 Avec les bases NoSQL comme MongoDB vous n'êtes pas obligé mais c'est **vivement** conseillé car ça vous permet de valider les données que vous aller mettre dans votre table. Si les champs et leur type ne sont pas respecté, le schéma lèvera une exception pour vous sans que vous ayez à lever le petit doigt 😺
 
