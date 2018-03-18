@@ -54,7 +54,7 @@ Dans le fichier `/imports/ui/layouts/app.html` nous avons enlevé l'injection du
 
 Sachez que vous pouvez avoir plusieurs template dynamique dans votre site. Il faut qu'au moment d'y injecter un template avec BlazeLayout, vous ayez spécifié le même nom que celui définit après `template=`.
 
-Enfin nous vous avons concoté un petit template `/imports/ui/pages/list_cryptos/list_crypto.html` qui permet de voir le détail d'une cryptomonnaie et d'effectuer des transactions. (Excusez nous pour le mauvais goût en design 🤮).
+Enfin nous vous avons concoté un petit template `/imports/ui/pages/crypto_details/crypto_details.html` qui permet de voir le détail d'une cryptomonnaie et d'effectuer des transactions. (Excusez nous pour le mauvais goût en design 🤮).
 
 Créez une route vers cette page !
 .
