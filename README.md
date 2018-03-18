@@ -36,7 +36,7 @@ export const Wallets = new Mongo.Collection('wallets');
 ### Création des portefeuilles pour un nouvel utilisateur
 Quand un utilisateur est créé, il faut initialiser ses portefeuilles.
 
-Dans le fichier `/imports/startup/server/wallets-hook.js` vous pouvez voir que l'on se sert de la fonction `Accounts.onCreateUser` pour intercepter la création d'un utilisateur et que dans le corps de cette fonction on ajouter le wallet en dollar et un wallet par cryptomonnaie.
+Dans le fichier `/imports/startup/server/wallets-hook.js` vous pouvez voir que l'on se sert de la fonction `Accounts.onCreateUser` pour intercepter la création d'un utilisateur et que dans le corps de cette fonction on ajoute le portefeuille en dollar et un portefeuille par cryptomonnaie grace à une boucle.
 
 ### Affichage des cryptomonnaies
 Insérez le template suivant dans le fichier `/imports/pages/list_cryptos/list_crypto.html`
