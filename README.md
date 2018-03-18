@@ -252,13 +252,13 @@ db.sales.find()
 
 ## Exercice
 
-Bon on vous a assez guidé pour la création de template donc on va vous faire bosser un tout petit peu :) (Vous aurez la correction dans la branche suivante mais pas de triche hein !)
+Bon on vous a assez guidé pour la création de template donc on va vous faire bosser un tout petit peu 😜 (Vous aurez la correction dans la branche suivante mais pas de triche hein !)
 
-Vous allez implémenter dans le dossier `/imports/ui/pages/crypto_details` la partie "Acheter" qui est réprésenté par le dossier du template `sale_orders`
+Vous allez implémenter dans le dossier `/imports/ui/pages/crypto_details` la partie "Acheter" qui est réprésenté par le dossier du template `sale_orders`.
 
 ### Consigne
 
-Affichez la liste des ordres de ventes (sauf celle de l'utilisateur connecté) avec un bouton acheter qui permet de répondre à un ordre de vente.
+Affichez la liste des ordres de ventes (sauf celle de l'utilisateur connecté) avec un bouton acheter qui permet de répondre à un ordre de vente. (Souvenez vous que vous avez un beau site hébergé par nos soins pour vous servir d'exemple 😄.
 
 ### Indications
 
