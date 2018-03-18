@@ -15,6 +15,19 @@ Nous avons importer pour vous la librairie Chart JS qui permet de faire des grap
 ```
 npm install chart.js --save
 ```
+Il suffit maintenant d'utiliser la librairie comme vous le feriez dans n'importe quel autre projet js.
+
+Insérez ce code dans le fichier `/imports/ui/pages/crypto_details/history/history.html`
+
+```html
+<template name="history">
+    <canvas style="width: 512px; height: 100px;" id="historyChart"></canvas>
+</template>
+```
+
+puis dans le fichier `/imports/ui/pages/crypto_details/history/history.html`
+
+
 
 ## Debriefing
 
