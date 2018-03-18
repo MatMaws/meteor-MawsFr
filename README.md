@@ -159,7 +159,7 @@ Meteor.publish('crypto', () => {
 Et voila vous venez de publier "toutes les cryptomonnaies" au monde entier 🌍️ Le nom du flux est au choix, nous avons choisi de mettre `crypto` mais vous pouvez très mettre `crypto.getAll` ou `jmleskebab` 🥪 
 
 Reste maintenant à faire en sorte que tous les clients qui affichent la page y accèdent (en temps réel je vous le rapelle). Pour cela il faut souscrire au flux de publication "crypto".
-Insérez dans le fichier `/imports/pages/list_cryptos/index.js`
+Insérez dans le fichier `/imports/ui/pages/list_cryptos/index.js`
 
 ```js
 Template.list_crypto.onCreated(function() {
@@ -167,7 +167,9 @@ Template.list_crypto.onCreated(function() {
 });
 ```
 
-Que fait ce code ? Tout simplement il demande à l'instance du template `list_crypto`, à sa création, de souscrire à la publication déclarée précédemment. Je dis "instance" car il est possible d'avoir plusieurs instance de votre template (bah oui tout l'interêt des templates c'est de pouvoir être réutilisable à plusieurs endroits de votre code et donc à chaque fois que vous insérer le template dans une page html avec la balise {{> list_crypto}}, une instance est créé). On peut se référer à l'instance en cours grâce à `this`. 
+Que fait ce code ? Tout simplement il demande à l'instance du template `list_crypto`, à sa création, de souscrire à la publication déclarée précédemment. Je dis "instance" car il est possible d'avoir plusieurs instance de votre template (bah oui tout l'interêt des templates c'est de pouvoir être réutilisable à plusieurs endroits de votre code et donc à chaque fois que vous insérer le template dans une page html avec la balise {{> list_crypto}}, une instance est créé). On peut se référer à l'instance en cours grâce à `this`.
+
+> Attention à ne pas utiliser la notation lambda de javascript `() => {}` et de bien laisser `function` ! Sinon `this` ne pointera pas sur le template
 
 Ayez bien en tête que chaque client qui souscris à une publication reçoit les même infos que les autres et dès qu'un changement opère sur les données, les clients sont notifiés et téléchargent les nouvelles données et les synchronisent avec leur base locale (le cache MiniMongo). C'est ce qui permet la réactivité de votre site web ✈️
 
