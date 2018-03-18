@@ -27,12 +27,6 @@ Insérez ce code dans le fichier `/imports/ui/pages/crypto_details/history/histo
 
 puis dans le fichier `/imports/ui/pages/crypto_details/history/history.html`
 
-
-
-## Debriefing
-
-Vous pouvez maintenant commit vos changements, `git checkout etape_5` et lire le **README.md** de cette branche.
-
 ## Et voilà, it just works !
 
 Alors c'est pas plaisant de coder avec ce framework avouez ?
