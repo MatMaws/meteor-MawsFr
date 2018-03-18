@@ -250,7 +250,7 @@ Voici la solution
 
 Dans `/imports/ui/pages/list_cryptos/index.js`
 
-```
+```js
 Template.list_crypto.helpers({
   cryptos() {
     return Crypto.find();
@@ -258,8 +258,8 @@ Template.list_crypto.helpers({
 });
 ```
 
-Il reste maintenant à faire la même chose pour Wallets.
-Créez une souscription à `Wallets` ainsi que le et modifiez le helper dans `imports/ui/components/navbar/index.js` et modifier la partie du menu qui affiche le portefeuille dans `imports/ui/components/navbar/index.html`.
+Il reste maintenant à faire la même chose pour les Wallets.
+Créez une souscription à `Wallets` ainsi que le helper dans `imports/ui/components/navbar/index.js` et modifiez la partie du menu qui affiche le portefeuille dans `imports/ui/components/navbar/index.html`.
 
 .
 
@@ -277,7 +277,7 @@ La souscription et le helper dans `/imports/ui/pages/list_cryptos/index.js`
 
 ```js
 Template.list_crypto.onCreated(function() {
-  this.subscribe('wallets');
+  this.subscribe('Wallets');
 });
 
 Template.crypto.helpers({
