@@ -43,7 +43,7 @@ Comme nous l'avons dis pendant la présentation, nous allons utiliser le moteur 
 
 #### Comment il fonctionne ?
 
-En gros, vous allez créer des composants HTML appelés `template` qui sont les briques visuels de votre application, par exemple "un menu", "un footer", "un panneau personalisé qui clignote" etc. Vous allez assembler ces templates pour créer des pages et ainsi votre site web. Ils permettent surtout de découper votre code en composant afin de ne pas avoir des gros morceau de page HTML dégeu. Il faut donc savoir comment découper votre site web.
+En gros, vous allez créer des composants HTML appelés `template` qui sont les briques visuels de votre application, par exemple "un menu", "un footer", "un panneau personalisé qui clignote" etc. Vous allez assembler ces templates pour créer des pages et ainsi votre site web. Ils permettent surtout de découper votre code en composant afin de ne pas avoir des gros morceau de page HTML dégeu. Il faut donc savoir comment bien découper votre site web.
 Dans notre cas nous avons choisi d'avoir
 
 * Un menu en haut
