@@ -118,7 +118,7 @@ Portefeuille: 9876 dollars
 #### Explication
 
 La variable Template permet de recupérer n'importe quel template par son nom, ici `navbar`.
-La fonction `helpers` permet de faire passer un objet au template. Cet objet peut contenir toutes les données que vous voulez ! Et pour afficher les données vous l'avez fait avec {{nom_de_variable}} ou {{nom_de_fonction}}.
+La fonction `helpers` permet de faire passer un objet au template. Cet objet peut contenir toutes les données que vous voulez (objet json ou fonction retournant un objet json) ! Et pour afficher les données vous l'avez fait avec {{nom_de_variable}} ou {{nom_de_fonction}}.
 
 ## Ajouter l'authentification
 Vous êtes peut être en train de vous dire
