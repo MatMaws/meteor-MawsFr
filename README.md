@@ -8,7 +8,8 @@ Un clone de bittrex dans le cadre du cours de CARA
 * Afficher la valeur en dollar de la saisie
 
 ## Utiliser des package NPM c'est aussi possible !
-Comme nous vous l'avons dis pendant la prez' 
+Comme nous vous l'avons dis pendant la prez', il est possible d'utiliser des package npm.
+
 ## Debriefing
 
 Alors pas trop dur n'est ce pas ? Meteor est la pour vous simplifier la récupération et l'affichage de données pendant que vous vous concentrez sur le fonctionnel de votre application.
