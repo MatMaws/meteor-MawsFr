@@ -1,4 +1,5 @@
 import { Crypto } from '../crytocurrency.js';
+import { History } from '../../history/history.js';
 
 if (true) {
   // Toute les 3 secondes (cf plus bas pour la config du timer)
@@ -11,6 +12,19 @@ if (true) {
       Crypto.update(
         { _id: element._id },
         { $set: { dollarValue: newDollarValue } }
+      );
+      History.update(
+        { code: element.code },
+        {
+          // Ajout d'une valeur
+          $push: {
+            // à ce tableau :
+            dollarValues: {
+              $each: newDollarValue, // la nouvelle valeur à ajouter
+              $slice: -10, // on ne garde que les 10 dernières entrées
+            },
+          },
+        }
       );
     });
   }, 3000);
