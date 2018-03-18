@@ -64,7 +64,7 @@ La commande créé un projet de base avec les dossiers principaux client et serv
 
 Bon comme vous avez cloné un repo Github, il va falloir faire un 
 ```Shell
-npm install
+meteor npm install
 ```
 
 ## Lancement du serveur
