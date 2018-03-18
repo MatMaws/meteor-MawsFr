@@ -143,6 +143,7 @@ Accounts.ui.config({
 ```
 
 Retournez sur votre site et voila 💘
+
 Vous pouvez créer des comptes sur votre site maintenant ! (Faites en aux moins deux pour les tests).
 
 ## Et voilà, it just works !
