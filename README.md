@@ -53,7 +53,7 @@ Cette veut dire "Injecte le template `app` dans le body de mon site et modifie s
 De ce fait nous avons du modifier un peu le code HTML pour que cela fonctionne.
 Dans le fichier `/imports/ui/layouts/app.html` nous avons enlevé l'injection du template `app` (car BlazeLayout le fait à notre place) et dans le fichier `/imports/ui/components/content/content.html` nous avons ajouté le template dynamique `main` avec
 
-```
+```html
 {{> Template.dynamic template=main}}
 ```
 
@@ -106,7 +106,7 @@ Vous pouvez maintenant cliquer sur l'une des cryptomonnaie de la page d'accueil 
 Pour l'instant le bouton "Valider" ne permet pas de créer un ordre de vente.
 Vous pourriez utiliser JQuery (bah oui, ca reste du JS avant tout !) mais il y'a mieux. Vous avez utilisé les helpers tout à l'heure, et bien vous avez la même chose avec les events !
 
-Voici le code du template "Vendre" qui se trouve dans le fichier `/imports/ui/pages/crypto_details/sell_panel/index.js`
+Voici le code du template "Vendre" qui se trouve dans le fichier `/imports/ui/pages/crypto_details/sell_panel/sell_panel.html`
 
 ```html
 <template name="sell_panel">
