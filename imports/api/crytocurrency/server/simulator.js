@@ -1,6 +1,6 @@
 import { Crypto } from '../crytocurrency.js';
 
-if (true) {
+if (false) {
   // Toute les 3 secondes (cf plus bas pour la config du timer)
   Meteor.setInterval(function() {
     // Pour chaque crypto
