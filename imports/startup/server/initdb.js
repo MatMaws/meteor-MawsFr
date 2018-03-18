@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Crypto } from '../../api/crytocurrency/crytocurrency.js';
+import { History } from '../../api/history/history.js';
 
 // Si la collection Crypto est vide au démarrage, on la rempli avec les données sur les crypto monnaie
 Meteor.startup(() => {
@@ -66,6 +67,7 @@ Meteor.startup(() => {
         volume: crypto.volume,
         dollarValue: crypto.dollarValue,
       });
+      History.insert({ code: crypto.code, dollarValues: [] });
     });
   }
 });
