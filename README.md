@@ -156,7 +156,7 @@ Template.sell_panel.events({
       owner: Meteor.userId(), // On récupère l'id du user actuel
       username: Meteor.user().username, // On récupère le pseudo du user actuel
     };
-    console.log (sale);
+    console.log(sale);
 
     // TODO : Insérer l'appel à la méthode Sales.sell
   },
@@ -177,14 +177,14 @@ Pour déclarer une méthode qui permet d'insérer un objet sale dans la pase col
 Meteor.methods({
   // Permet de vendre de la monnaie
   'Sales.sell'(sale) {
-      Sales.insert(sale); // ajout de la vente
-    }
+    Sales.insert(sale); // ajout de la vente
+  },
 });
 ```
 
 Voila comment on déclare des méthodes. Les méthodes permettent de faire un traitement avant d'insérer les données. Comme un webservice quoi.
 
- **Mais ATTENDEZ NE CLIQUEZ SUR RIEN !** Sinon vous allez insérer des données non cohérentes. Il faut quand même vérifier si le portefeuille de l'utilisateur permet cette transaction. Voici une version un peu plus complète
+**Mais ATTENDEZ NE CLIQUEZ SUR RIEN !** Sinon vous allez insérer des données non cohérentes. Il faut quand même vérifier si le portefeuille de l'utilisateur permet cette transaction. Voici une version un peu plus complète
 
 ```js
 Meteor.methods({
@@ -239,13 +239,16 @@ Meteor.call('Sales.sell', sale, (err, res) => {
 ```
 
 # Des erreurs ?
+
 > Si vous avez une erreur lorsque vous testez c'est que vous utilisez un compte utilisateur qui n'a pas de portefeuille (surement que vous en avez créé un avant que l'on ajoute la fonction Account.onCreated qui créé les portefeuille de l'utilisateur). Pour régler ce problème il faut
-> - Soit créer un nouveau compte et ne plus utiliser l'autre
-> - Pour etre plus tranquille videz la base de données avec un db.users.drop() dans une console serveur lancée avec `meteor mongo` et recréez un utilisateur.
+>
+> * Soit créer un nouveau compte et ne plus utiliser l'autre
+> * Pour etre plus tranquille videz la base de données avec un db.users.drop() dans une console serveur lancée avec `meteor mongo` et recréez un utilisateur.
 
 Testez !
 
 Vous pouvez vérifier que vos ordres de ventes sont bien insérés en allant dans une console mongo db en tapant dans la console à la racine de votre projet `meteor mongo` et en utilisant la requete
+
 ```
 db.sales.find()
 ```
@@ -270,7 +273,24 @@ Pour vous aider, vous aurez besoin de :
   * D'ailleurs la souscription à été faite dans le template parent `crypto_details` qui transmet à tout les templates enfants dont `saleOrders`
 * Vous devez utiliser un helper pour récupérer les ordres de ventes de la consigne
 * Vous devez créer la partie qui liste les ligne (template saleOrder déjà créé) dans le fichier `sale_orders.html`
-  * Veillez bien à testez sur un autre navigateur car vous n'êtes pas censé pouvoir acheter vos propres ordres de vente (navigation privé) 
+  * Veillez bien à testez sur un autre navigateur car vous n'êtes pas censé pouvoir acheter vos propres ordres de vente (navigation privé)
+  * **IMPORTANT :** Sachez que lorsque vous écrivez
+
+```html
+{{#each tasks}}
+  {{> task}} // injection du template task
+{{/each}}
+```
+   et qu'en javascript vous définissez un helper sur task, `this` pointe sur l'objet en cours d'itération dans le code suivant
+
+```js
+Template.task.helpers({
+  getTask() {
+    return Crypto.find({text: this.text}); // this pointe sur l'objet en cours d'itération
+  }
+});
+```
+
 * Vous devez créer un event qui répondra au clic du bouton "Acheter".
   * Utilisez l'évenement 'click .buyButton'
 * Vous devez créer une Méthode 'Sales.buy' et l'apeller
