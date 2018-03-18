@@ -171,7 +171,7 @@ Le plus important ici est d'utiliser l'objet sale généré par nos soins pour l
 
 Une méthode est une fonction définit du côté client **ET** serveur. Cette fonction nous rapelle un peu les webservice que l'on code: Le serveur expose des webservices et le client les appelle.
 
-Pour déclarer une méthode qui permet d'insérer un objet sale dans la pase collection Sales, insérer le code suivant dans le fichier `/imports/api/sales/methods.js`
+Pour déclarer une méthode qui permet d'insérer un objet sale dans la pase collection Sales, insérer le code suivant dans le fichier `/imports/api/sales/methods.js` **SANS CLIQUER SUR LE BOUTON VALIDER**
 
 ```js
 Meteor.methods({
