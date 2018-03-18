@@ -163,11 +163,13 @@ Template.sell_panel.events({
 });
 ```
 
-Les commentaires parlent d'eux même. Le plus important ici est d'utiliser l'objet sale généré par nos soins pour l'insérer en base du côté serveur. Mais comment faire ? Si vous avez écoutez la présentation, vous avez dû entendre parler des Méthodes !
+Les commentaires parlent d'eux même. Allez voir dans la console chrome ou firefox l'objet qui est généré.
+
+Le plus important ici est d'utiliser l'objet sale généré par nos soins pour l'insérer en base du côté serveur. Mais comment faire ? Si vous avez écoutez la présentation, vous avez dû entendre parler des Méthodes !
 
 ### Insérer en base avec les méthodes
 
-Une méthode est une fonction définit du côté client **ET** serveur. Cette fonction nous rapelle un peu les webservice que l'on code: Le serveur expose des webservices et le client les appelles.
+Une méthode est une fonction définit du côté client **ET** serveur. Cette fonction nous rapelle un peu les webservice que l'on code: Le serveur expose des webservices et le client les appelle.
 
 Pour déclarer une méthode qui permet d'insérer un objet sale dans la pase collection Sales, insérer le code suivant dans le fichier `/imports/api/sales/methods.js`
 
