@@ -83,10 +83,12 @@ FlowRouter.route('/crypto/:code', {
 });
 ```
 
-Vous apercevez dans ce petit bout de code que l'on passe un paramètre `:code` dans l'url. Celui ci est récupérable dans la variable params en faisant
+Vous apercevez dans ce petit bout de code que l'on attend un paramètre `:code` dans l'url. Celui ci est récupérable dans la variable params en faisant
 ```js
 params.code // ou params['code']
 ```
+
+NB : Le code d'une crypto est son nom abrégé exemple btc, xvg etc ... testez !
 
 Vous pouvez aussi faire passer des paramètre de requete de cette manière `/crypto/:code?sort=:sort` et les récupérer de la même manière grâce à la variable queryParams.
 
