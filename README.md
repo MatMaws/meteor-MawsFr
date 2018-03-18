@@ -21,7 +21,7 @@ Vous avez là un exemple de réactivité car si vous  ouvrez à côté un autre 
 On pourrai très bien remplacer ce code par un appel REST 😊 (Mais nous ne le faisons pas car on a peur des imprévu avec le proxy etc ..).
 
 ## Afficher une nouvelle page
-Il existe plusieurs librairie de routing pour Meteor qui lui préconise d'utiliser FlowRouter combiné avec BlazeLayout. Nous les avons déjà intégré dans le projet ;) (rapellez vous le gros meteor npm install)
+Il existe plusieurs librairie de routing pour Meteor sachant qu'il préconise d'utiliser FlowRouter combiné avec BlazeLayout. Nous les avons déjà intégré dans le projet ;) (rapellez vous le gros meteor npm install)
 
 Avec FlowRouter permet de définir des fonctions qui vont être exécutées selon l'url tandis que BlazeLayout va permettre de choisir le composant à afficher à l'endroit ou l'on veut.
 
