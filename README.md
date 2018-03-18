@@ -238,6 +238,18 @@ Meteor.call('Sales.sell', sale, (err, res) => {
 });
 ```
 
+# Des erreurs ?
+> Si vous avez une erreur lorsque vous testez c'est que vous utilisez un compte utilisateur qui n'a pas de portefeuille (surement que vous en avez créé un avant que l'on ajoute la fonction Account.onCreated qui créé les portefeuille de l'utilisateur). Pour régler ce problème il faut
+> - Soit créer un nouveau compte et ne plus utiliser l'autre
+> - Pour etre plus tranquille videz la base de données avec un db.users.drop() dans une console serveur lancée avec `meteor mongo` et recréez un utilisateur.
+
+Testez !
+
+Vous pouvez vérifier que vos ordres de ventes sont bien insérés en allant dans une console mongo db en tapant dans la console à la racine de votre projet `meteor mongo` et en utilisant la requete
+```
+db.sales.find()
+```
+
 ## Exercice
 
 Bon on vous a assez guidé pour la création de template donc on va vous faire bosser un tout petit peu :) (Vous aurez la correction dans la branche suivante mais pas de triche hein !)
