@@ -62,17 +62,13 @@ Simple non ? Après ça vous pouvez commencer à travailler !
 
 La commande `meteor create` créé un projet de base avec les dossiers principaux client et server ainsi que tous les fichiers main.\* .
 
-> Sachez qu'il est possible d'avoir un dossier avec une architecture plus complète en éxécutant la commande
-> `Shell meteor create bitdenver --full`.
-> Essayez dans un autre dossier pour voir la différence !
-
 Bon comme vous avez cloné un repo Github, il va falloir faire un
 
 ```Shell
 meteor npm install
 ```
 
-C'est l'équivalent du `npm install` sauf qu'il va aussi chercher les dépendances depuis AtmosphereJS donc ne l'oubliez pas 😃
+C'est l'équivalent du `npm install` sauf qu'il va **aussi** chercher les dépendances depuis AtmosphereJS donc ne l'oubliez pas 😃
 
 ## Lancement du serveur
 
