@@ -23,7 +23,7 @@ On pourrai très bien remplacer ce code par un appel REST 😊 (Mais nous ne le 
 ## Afficher une nouvelle page
 Il existe plusieurs librairie de routing pour Meteor sachant qu'il préconise d'utiliser FlowRouter combiné avec BlazeLayout. Nous les avons déjà intégré dans le projet ;) (rapellez vous le gros meteor npm install)
 
-Avec FlowRouter permet de définir des fonctions qui vont être exécutées selon l'url tandis que BlazeLayout va permettre de choisir le composant à afficher à l'endroit ou l'on veut.
+FlowRouter permet de définir des fonctions qui vont être exécutées selon l'url tandis que BlazeLayout va permettre de choisir le composant à afficher à l'endroit ou l'on veut.
 
 Regardez le fichier `imports/startup/client/routes.js`
 ```js
@@ -36,14 +36,14 @@ FlowRouter.route('/', {
 });
 ```
 
-Nous avons défini une route `/` vers la page d'accueil. (le surnom `Crypto.showAll` ne nous servira pas). A chaque fois que vous afficherez la page d'accueil, la fonction `action` sera appelée.
+Nous avons défini une route `/` vers la page d'accueil (le surnom `Crypto.showAll` ne nous servira pas). A chaque fois que vous afficherez la page d'accueil, la fonction `action` sera appelée.
 
 Regardons de plus près la partie
 ```js
 BlazeLayout.render('app', { main: 'list_crypto' });
 ```
 
-Cette veut dire "Injecte le template `app` dans le body et modifie sa partie dynamique que j'ai appelé `main` pour y afficher `list_crypto`.
+Cette veut dire "Injecte le template `app` dans le body de mon site et modifie sa partie dynamique que j'ai appelé `main` ici pour y afficher le template `list_crypto`.
 
 De ce fait nous avons du modifier un peu le code HTML pour que cela fonctionne.
 Dans le fichier `/imports/ui/layouts/app.html` nous avons enlevé l'injection du template `app` (car BlazeLayout le fait à notre place) et dans le fichier `/imports/ui/components/content/content.html` nous avons ajouté le template dynamique `main` avec
