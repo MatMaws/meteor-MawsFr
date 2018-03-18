@@ -24,7 +24,7 @@ Comme vous devez vous en doutez, vous êtes seul ...
 
 Voila je vous laisse sur çà aurevoir.
 
-Plus sérieusement, votre application va tourner sur votre PC à vous et personne d'autre n'y aura accès donc pour tester c'est un peu pauvre. A moins de réussir à accéder au PC des autres par leur ip local vous serez seul à tester sa réactivité (sur plusieurs navigateurs en même temps par exemple oui bien vu Jean Maxime !)
+Plus sérieusement, votre application va tourner sur votre PC à vous et personne d'autre n'y aura accès donc pour tester c'est un peu pauvre. A moins de réussir à accéder au PC des autres par leur ip local vous serez seul à tester sa réactivité ...
 
 Nous avons donc hébergé l'appli final pour que vous puissiez tester. Sinon vous pouvez la tester avec deux navigateur ou un navigateur en mode privé et un autre en mode normal, ça fonctionne aussi ;)
 
