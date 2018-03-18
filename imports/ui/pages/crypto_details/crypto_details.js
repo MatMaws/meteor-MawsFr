@@ -7,6 +7,7 @@ import { Wallets } from '../../../api/wallets/wallets';
 import { Sales } from '../../../api/sales/sales';
 
 import './description';
+import './history';
 import './sell_panel';
 import './sale_orders';
 import './transactions';
