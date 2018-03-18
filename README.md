@@ -140,7 +140,9 @@ Ce bloc peut aussi s'écrire sous une forme plus explicite
 La variable cryptomonnaie est implicitement déclarée et passée au template `crypto`.
 
 Insérez ensuite
-``{{> list_crypto}}``
+```
+{{> list_crypto}}
+```
 dans content.html.
 
 ### Affichons les données
