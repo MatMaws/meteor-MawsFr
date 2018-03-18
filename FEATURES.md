@@ -150,4 +150,4 @@ Vous pouvez créer des comptes sur votre site maintenant ! (Faites en aux moins 
 
 Excusez nous des problèmes de CSS, on a pas eu le temps de les corriger 😰 #jeSuisPEPIT. Après bon on vous a évité une authent fastidieuse vous pouvez pas nous en vouloir :3.
 
-Vous pouvez maintenant pull la branche `etape_2` et lire le fichier **README.md** de cette branche.
+Vous pouvez maintenant faire `git checkout etape_2` et lire le fichier **README.md** de cette branche.
