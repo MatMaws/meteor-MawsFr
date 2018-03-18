@@ -156,7 +156,8 @@ Meteor.publish('crypto', () => {
   return Crypto.find({});
 });
 ```
-Et voila vous venez de publier "toutes les cryptomonnaies" au monde entier 🌍️
+Et voila vous venez de publier "toutes les cryptomonnaies" au monde entier 🌍️ Le nom du flux est au choix, nous avons choisi de mettre `crypto` mais vous pouvez très mettre `crypto.getAll` ou `jmleskebab` 🥪 
+
 Reste maintenant à faire en sorte que tous les clients qui affichent la page y accèdent (en temps réel je vous le rapelle). Pour cela il faut souscrire au flux de publication "crypto".
 Insérez dans le fichier `/imports/pages/list_cryptos/index.js`
 
