@@ -7,7 +7,7 @@ Un clone de bittrex dans le cadre du cours de CARA
 
 ## C'est parti
 En résumé voici comment on va procéder
-- On créé le schéma de la collection contenant la liste de cryptomonnaie
+- On créé les collection Crypto (contenant la liste des cryptomonnaies) et Wallets (contenant les portfeuille des utilisateurs) ainsi que leurs schémas 
 - On rempli cette table automatiquement au démarrage du serveur si elle est vide, avec des données sur les cryptomonnaies
 - On publie ces données du côté serveur et on y souscris du côté client
 - On créé et on on injecte un composant qui qui va afficher ces données récupérées
