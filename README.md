@@ -179,7 +179,6 @@ Meteor.methods({
   'Sales.sell'(sale) {
       Sales.insert(sale); // ajout de la vente
     }
-  }
 });
 ```
 
