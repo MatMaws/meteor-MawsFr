@@ -144,6 +144,8 @@ Insérez ensuite dans `imports/ui/components/content/content.html`
 {{> list_crypto}}
 ```
 
+Vous ne voyez rien ? c'est normal nous n'avons encore rien inséré dans la collection des cryptomonnaie 😅
+
 ### Affichons les données
 Cette partie regroupe trois gros concepts: les publications, les souscriptions et les helpers. Vous connaissez déjà l'un des trois, reste à voir les deux autres.
 
