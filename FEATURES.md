@@ -109,10 +109,10 @@ par
 Portefeuille: {{dollarWallet}} {{currency}}
 ```
 
-Vous observez
+Vous observez que le menu à changé pour
 
 ```
-Portefeuille: 9876 $
+Portefeuille: 9876 dollars
 ```
 
 #### Explication
