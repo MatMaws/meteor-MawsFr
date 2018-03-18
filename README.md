@@ -119,7 +119,7 @@ Ainsi on peut voir que l'on se sert de la variable currentUser (importée automa
 Si un utilisateur n'est pas connecté, certaines informations n'ont pas a être affichée.
 
 #### Le block {{# each}}
-Rappel: Nous voulons sur la page d'accueil la liste des cryptomonnaire sous forme de carte contenant certaines informations. Nous devons donc itérer sur chaque cryptomonnaie pour afficher sa description. 
+Rappel: Nous voulons sur la page d'accueil la liste des cryptomonnaies sous forme de carte contenant certaines informations. Nous devons donc itérer sur chaque cryptomonnaie pour afficher sa description. 
 
 Analysons les templates. 
 
