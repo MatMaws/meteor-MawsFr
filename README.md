@@ -171,7 +171,7 @@ Que fait ce code ? Tout simplement il demande à l'instance du template `list_cr
 
 > Attention à ne pas utiliser la notation lambda de javascript `() => {}` et de bien laisser `function` ! Sinon `this` ne pointera pas sur le template
 
-Ayez bien en tête que chaque client qui souscris à une publication reçoit les même infos que les autres et dès qu'un changement opère sur les données, les clients sont notifiés et téléchargent les nouvelles données et les synchronisent avec leur base locale (le cache MiniMongo). C'est ce qui permet la réactivité de votre site web ✈️
+Ayez bien en tête que chaque client qui souscris à une publication reçoit les même infos que les autres et que dès qu'un changement opère sur les données, les clients sont notifiés et téléchargent les nouvelles données et les synchronisent avec leur base locale (le cache MiniMongo). C'est ce qui permet la réactivité de votre site web ✈️
 
 On aurait aussi pu écrire
 ```js
@@ -212,7 +212,7 @@ Je vous laisse faire.
 C'est bon ?
 Voici la solution
 
-Dans `/imports/pages/list_cryptos/index.js`
+Dans `/imports/ui/pages/list_cryptos/index.js`
 ```
 Template.list_crypto.helpers({
   cryptos() {
