@@ -71,7 +71,7 @@ Rendez vous maintenant sur votre [site](localhost:3000) et observez. Vous venez 
 
 Et faire du templating avec Blaze ce n'est que ça, injecter des template et y afficher des données.
 
-Vous pouvez maintenant injecter votre menu, votre contenu vide et votre pied de page à l'emplacement du TODO.
+Vous pouvez maintenant injecter votre menu, votre contenu vide et votre pied de page à la place du Hello World.
 
 ```html
 <template name="app">
