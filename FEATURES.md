@@ -58,7 +58,7 @@ Le fichier `client/main.html` contient le body de votre application. Insérez en
 {{> app}}
 ```
 
-Allez dans le fichier `imports/startup/ui/layouts/app.html` et observez le code suivant
+Allez dans le fichier `imports/ui/layouts/app.html` et observez le code suivant
 
 ```html
 <template name="app">
