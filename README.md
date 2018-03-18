@@ -264,10 +264,13 @@ Affichez la liste des ordres de ventes (sauf celle de l'utilisateur connecté) a
 
 Pour vous aider, vous aurez besoin de :
 
-* Meteor.userId() permet de récupérer du côté client **MAIS AUSSI** serveur l'id de l'utilisateur connecté et qui à fait l'action
+* Meteor.userId() qui permet de récupérer du côté client **MAIS AUSSI** serveur l'id de l'utilisateur connecté et qui à fait l'action (en général à mettre dans un champs owner)
+* Meteor.user().username qui permet de récupérer du côté client **MAIS AUSSI** serveur le username de l'utilisateur connecté et qui à fait l'action (en général à mettre dans un champs username)
 * La publication et la souscription de la collection Sales à déjà été faite pour vous donc vous pouvez utiliser la collection du côté client pour faire des requête dessus.
-  * D'ailleurs la souscription à été faite dans le template parent `crypto_details` qui transmet à tout les template enfants dont `saleOrders`
+  * D'ailleurs la souscription à été faite dans le template parent `crypto_details` qui transmet à tout les templates enfants dont `saleOrders`
 * Vous devez utiliser un helper pour récupérer les ordres de ventes de la consigne
+* Vous devez créer la partie qui liste les ligne (template saleOrder déjà créé) dans le fichier `sale_orders.html`
+  * Veillez bien à testez sur un autre navigateur car vous n'êtes pas censé pouvoir acheter vos propres ordres de vente (navigation privé) 
 * Vous devez créer un event qui répondra au clic du bouton "Acheter".
   * Utilisez l'évenement 'click .buyButton'
 * Vous devez créer une Méthode 'Sales.buy' et l'apeller
