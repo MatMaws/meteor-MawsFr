@@ -3,6 +3,6 @@ import { Sales } from './sales';
 import { Wallets } from '../wallets/wallets.js';
 
 
-// TODO : Insérer vos méthode
+// TODO : Insérer vos méthodes
 
 
